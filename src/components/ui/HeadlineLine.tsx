@@ -7,10 +7,12 @@ export default function HeadlineLine({
   children,
   index,
   opacity,
+  delayStep = 0.08,
 }: {
   children: ReactNode;
   index: number;
   opacity: number;
+  delayStep?: number;
 }) {
   return (
     <motion.span
@@ -18,7 +20,7 @@ export default function HeadlineLine({
       initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
       animate={{ opacity, y: 0, filter: "blur(0px)" }}
       transition={{
-        delay: index * 0.08,
+        delay: index * delayStep,
         duration: 0.7,
         ease: [0.16, 1, 0.3, 1],
       }}

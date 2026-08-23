@@ -1,4 +1,5 @@
 import AnimatedSection from "@/components/ui/AnimatedSection";
+import TiltCard from "@/components/ui/TiltCard";
 
 const PLATFORMS = [
   {
@@ -15,13 +16,13 @@ const PLATFORMS = [
 
 export default function Platforms() {
   return (
-    <section className="section">
+    <div className="section flex flex-col justify-center min-h-screen">
       <div className="container-wide">
         <AnimatedSection>
           <p className="eyebrow mb-4">Plataformas</p>
         </AnimatedSection>
         <AnimatedSection delay={0.05}>
-          <h2 className="text-[clamp(2rem,4.5vw,3.25rem)] leading-[1.05] max-w-[640px] mb-14">
+          <h2 className="text-[clamp(2.25rem,5vw,3.75rem)] leading-[1.02] max-w-[640px] mb-14">
             Onde seu cliente já está olhando.
           </h2>
         </AnimatedSection>
@@ -29,22 +30,24 @@ export default function Platforms() {
         <div className="grid sm:grid-cols-2 gap-5">
           {PLATFORMS.map((p, i) => (
             <AnimatedSection key={p.name} delay={0.1 * i}>
-              <div
-                className="rounded-[24px] p-9 border border-[var(--border)] h-full"
-                style={{
-                  background:
-                    "linear-gradient(160deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015))",
-                  backdropFilter: "blur(20px)",
-                }}
-              >
-                <p className="eyebrow text-[var(--orange-500)] mb-3">{p.channels}</p>
-                <h3 className="text-[26px] mb-4">{p.name}</h3>
-                <p className="text-[var(--text-300)] text-[16px] leading-relaxed">{p.text}</p>
-              </div>
+              <TiltCard className="rounded-[24px]">
+                <div
+                  className="relative rounded-[24px] p-9 border border-subtle h-full"
+                  style={{
+                    background:
+                      "linear-gradient(160deg, rgba(255,255,255,0.05), rgba(255,255,255,0.015))",
+                    backdropFilter: "blur(20px)",
+                  }}
+                >
+                  <p className="eyebrow text-[var(--orange-500)] mb-3">{p.channels}</p>
+                  <h3 className="text-[26px] mb-4">{p.name}</h3>
+                  <p className="text-muted text-[16px] leading-relaxed">{p.text}</p>
+                </div>
+              </TiltCard>
             </AnimatedSection>
           ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

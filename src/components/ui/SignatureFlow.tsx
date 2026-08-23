@@ -189,7 +189,7 @@ export default function SignatureFlow({
                 x={c.x}
                 y={c.y + 15}
                 textAnchor="middle"
-                fill="var(--text-500)"
+                fill="var(--text-dark-3)"
                 fontSize="11"
                 fontFamily="var(--font-inter)"
                 letterSpacing="0.02em"

@@ -1,76 +1,99 @@
+"use client";
+
+import { useRef } from "react";
 import Image from "next/image";
+import { motion, useScroll, useTransform } from "framer-motion";
 import AnimatedSection from "@/components/ui/AnimatedSection";
-import whatsappMockup from "../../../public/images/whatsapp-mockup.webp";
+import CountUp from "@/components/ui/CountUp";
+import WhatsAppMockup from "@/components/ui/WhatsAppMockup";
 import diegoRetrato from "../../../public/images/diego-retrato.webp";
 
+const STATS = [
+  { value: 4.1, decimals: 1, suffix: "×", label: "agendamentos" },
+  { value: 62, decimals: 0, suffix: "", label: "dias até o resultado" },
+  { value: -31, decimals: 0, suffix: "%", label: "custo por contato" },
+];
+
 export default function Results() {
+  const photoRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: photoRef,
+    offset: ["start end", "end start"],
+  });
+  const photoY = useTransform(scrollYProgress, [0, 1], [-40, 40]);
+
   return (
-    <section className="section bg-[var(--bg-900)]">
-      <div className="container-wide grid lg:grid-cols-[0.85fr_1.15fr] gap-16 items-center">
-        <AnimatedSection>
-          <div className="relative aspect-[4/5] rounded-[24px] border border-[var(--border)] overflow-hidden">
+    <div className="section">
+      <div className="container-wide">
+        {/* editorial band — portrait with the quote overlapping it */}
+        <div
+          ref={photoRef}
+          className="relative h-[480px] sm:h-[560px] rounded-[28px] overflow-hidden mb-16"
+        >
+          <motion.div style={{ y: photoY }} className="absolute inset-[-10%]">
             <Image
-              src={whatsappMockup}
-              alt="Mockup de celular mostrando conversas de clientes chegando no WhatsApp Business da DLX Digital"
-              width={1086}
-              height={1448}
-              className="w-full h-full object-cover"
+              src={diegoRetrato}
+              alt="Diego, fundador da DLX Digital"
+              fill
+              className="object-cover"
+              sizes="100vw"
             />
+          </motion.div>
+          <div
+            aria-hidden
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(100deg, rgba(8,8,8,.88) 0%, rgba(8,8,8,.55) 38%, transparent 68%)",
+            }}
+          />
+          <div className="relative h-full flex flex-col justify-end p-8 sm:p-14 max-w-[640px]">
+            <AnimatedSection>
+              <p className="eyebrow mb-4 text-[var(--text-dark-2)]!">Resultado</p>
+            </AnimatedSection>
+            <AnimatedSection delay={0.06}>
+              <blockquote className="[font-family:var(--font-general-sans)] font-medium text-[clamp(1.5rem,3.4vw,2.5rem)] leading-[1.2] text-[var(--text-dark-1)]">
+                &ldquo;Antes eu só via curtida. Depois que a DLX assumiu, o
+                WhatsApp não para — e a agenda também não.&rdquo;
+              </blockquote>
+            </AnimatedSection>
+            <AnimatedSection delay={0.12}>
+              <p className="mt-5 text-[14px] text-[var(--text-dark-2)]">
+                Diego · Fundador, DLX Digital
+              </p>
+            </AnimatedSection>
           </div>
-        </AnimatedSection>
+        </div>
 
-        <div>
-          <AnimatedSection>
-            <p className="eyebrow mb-4">Resultado</p>
-          </AnimatedSection>
+        {/* proof: mockup + stats sliding in from opposite sides */}
+        <div className="grid lg:grid-cols-[0.85fr_1.15fr] gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <WhatsAppMockup />
+          </motion.div>
 
-          <AnimatedSection delay={0.05}>
-            <blockquote className="[font-family:var(--font-general-sans)] font-medium text-[clamp(1.5rem,3vw,2.25rem)] leading-[1.25] text-[var(--text-100)]">
-              &ldquo;Antes eu só via curtida. Depois que a DLX assumiu, o
-              WhatsApp não para — e a agenda também não.&rdquo;
-            </blockquote>
-          </AnimatedSection>
-
-          <AnimatedSection delay={0.08}>
-            <div className="mt-6 flex items-center gap-3">
-              <Image
-                src={diegoRetrato}
-                alt="Diego, fundador da DLX Digital"
-                width={1122}
-                height={1402}
-                className="w-11 h-11 rounded-full object-cover border border-[var(--border-hover)]"
-              />
-              <div>
-                <p className="text-[14px] font-medium text-[var(--text-100)]">Diego</p>
-                <p className="text-[13px] text-[var(--text-500)]">Fundador, DLX Digital</p>
-              </div>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection delay={0.12}>
-            <div className="mt-10 grid grid-cols-3 gap-6 max-w-[420px]">
-              <div>
-                <p className="[font-family:var(--font-general-sans)] font-semibold text-[2rem] leading-none">
-                  4,1×
+          <motion.div
+            initial={{ opacity: 0, x: 60 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+            className="grid grid-cols-3 gap-6 max-w-[420px]"
+          >
+            {STATS.map((s) => (
+              <div key={s.label}>
+                <p className="[font-family:var(--font-general-sans)] font-semibold text-[2.25rem] leading-none">
+                  <CountUp value={s.value} decimals={s.decimals} suffix={s.suffix} />
                 </p>
-                <p className="mt-2 text-[13px] text-[var(--text-500)]">agendamentos</p>
+                <p className="mt-2 text-[13px] text-muted">{s.label}</p>
               </div>
-              <div>
-                <p className="[font-family:var(--font-general-sans)] font-semibold text-[2rem] leading-none">
-                  62
-                </p>
-                <p className="mt-2 text-[13px] text-[var(--text-500)]">dias até o resultado</p>
-              </div>
-              <div>
-                <p className="[font-family:var(--font-general-sans)] font-semibold text-[2rem] leading-none">
-                  -31%
-                </p>
-                <p className="mt-2 text-[13px] text-[var(--text-500)]">custo por contato</p>
-              </div>
-            </div>
-          </AnimatedSection>
+            ))}
+          </motion.div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

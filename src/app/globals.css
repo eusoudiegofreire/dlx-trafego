@@ -3,17 +3,13 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg-950: var(--bg-950);
-  --color-bg-900: var(--bg-900);
-  --color-surface-800: var(--surface-800);
-  --color-surface-700: var(--surface-700);
+  --color-black: var(--black);
+  --color-black-900: var(--black-900);
+  --color-cream: var(--cream);
+  --color-cream-200: var(--cream-200);
   --color-orange-500: var(--orange-500);
   --color-orange-400: var(--orange-400);
-  --color-text-100: var(--text-100);
-  --color-text-300: var(--text-300);
-  --color-text-500: var(--text-500);
-  --color-border: var(--border);
-  --color-border-hover: var(--border-hover);
+  --color-ink: var(--ink);
 
   --font-display: var(--font-general-sans);
   --font-body: var(--font-inter);
@@ -21,37 +17,41 @@
 }
 
 :root {
-  /* --- BASE (78%) --- */
-  --bg-950: #080808;
-  --bg-900: #0e0e0e;
+  /* --- DARK SECTIONS --- */
+  --black: #080808;
+  --black-900: #0e0e0e;
+  --surface-dark: #151515;
+  --surface-dark-hover: #1c1c1c;
+  --border-dark: rgba(255, 255, 255, 0.1);
+  --border-dark-hover: rgba(255, 255, 255, 0.2);
+  --text-dark-1: #f4f1ea;
+  --text-dark-2: #a5a5a0;
+  --text-dark-3: #8a8a83;
 
-  /* --- SURFACE (15%) --- */
-  --surface-800: #151515;
-  --surface-700: #1c1c1c;
+  /* --- LIGHT SECTIONS --- */
+  --cream: #f4f1ea;
+  --cream-200: #e8e4d8;
+  --surface-light: #ffffff;
+  --border-light: rgba(10, 10, 10, 0.1);
+  --border-light-hover: rgba(10, 10, 10, 0.22);
+  --text-lite-1: #0a0a0a;
+  --text-lite-2: #5a574f;
 
-  /* --- ACCENT (7% max) --- */
+  /* --- ACCENT --- */
   --orange-500: #ff5a1f;
   --orange-400: #ff814d;
-  --orange-glow: rgba(255, 90, 31, 0.05);
-
-  /* --- TEXT --- */
-  --text-100: #f4f1ea;
-  --text-300: #a5a5a0;
-  --text-500: #8a8a83; /* bumped from brief's #6E6E68 for WCAG AA contrast on --bg-950 */
-
-  /* --- LINES --- */
-  --border: rgba(255, 255, 255, 0.08);
-  --border-hover: rgba(255, 255, 255, 0.16);
+  --orange-glow: rgba(255, 90, 31, 0.08);
+  --ink: #0a0a0a;
 
   /* --- FONTS --- */
   --font-general-sans: "General Sans", sans-serif;
   --font-inter: "Inter", sans-serif;
   --font-jetbrains: "JetBrains Mono", monospace;
 
-  /* --- SHADOWS --- */
-  --shadow-card: 0 20px 80px rgba(0, 0, 0, 0.4), 0 0 60px rgba(255, 90, 31, 0.04);
+  --shadow-card-dark: 0 20px 80px rgba(0, 0, 0, 0.4), 0 0 60px rgba(255, 90, 31, 0.05);
+  --shadow-card-light: 0 20px 60px rgba(10, 10, 10, 0.08);
 
-  --section-py: clamp(4rem, 10vw, 8.75rem);
+  --section-py: clamp(4.5rem, 11vw, 9.5rem);
 }
 
 *,
@@ -61,12 +61,13 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* Lenis owns smooth scrolling — native smooth-scroll would fight it */
+  scroll-behavior: auto;
 }
 
 body {
-  background: var(--bg-950);
-  color: var(--text-100);
+  background: var(--black);
+  color: var(--text-dark-1);
   font-family: var(--font-inter);
   font-size: 16px;
   line-height: 1.6;
@@ -80,7 +81,6 @@ h3,
 h4 {
   font-family: var(--font-general-sans);
   font-weight: 600;
-  color: var(--text-100);
 }
 
 /* Layout */
@@ -99,14 +99,61 @@ h4 {
   position: relative;
 }
 
-/* Eyebrow label */
+/* Section color modes — every stacked section is one of these */
+.section-dark {
+  background: var(--black);
+  color: var(--text-dark-1);
+}
+.section-light {
+  background: var(--cream);
+  color: var(--text-lite-1);
+}
+.section-orange {
+  background: var(--orange-500);
+  color: var(--ink);
+}
+
+/* Muted text tiers — resolve per section mode so components stay mode-agnostic */
+.text-muted {
+  color: var(--text-dark-2);
+}
+.text-faint {
+  color: var(--text-dark-3);
+}
+.section-light .text-muted {
+  color: var(--text-lite-2);
+}
+.section-light .text-faint {
+  color: var(--text-lite-2);
+}
+.section-orange .text-muted,
+.section-orange .text-faint {
+  color: color-mix(in oklab, var(--ink) 65%, transparent);
+}
+
+.border-subtle {
+  border-color: var(--border-dark);
+}
+.section-light .border-subtle {
+  border-color: var(--border-light);
+}
+.section-orange .border-subtle {
+  border-color: rgba(10, 10, 10, 0.18);
+}
+
 .eyebrow {
   font-family: var(--font-inter);
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--text-500);
+}
+.section-dark .eyebrow,
+.section-orange .eyebrow {
+  color: color-mix(in oklab, currentColor 60%, transparent);
+}
+.section-light .eyebrow {
+  color: var(--text-lite-2);
 }
 
 /* Buttons */
@@ -118,7 +165,7 @@ h4 {
   padding: 0 22px 0 30px;
   border-radius: 12px;
   background: var(--orange-500);
-  color: #0a0a0a;
+  color: var(--ink);
   font-family: var(--font-inter);
   font-weight: 600;
   font-size: 16px;
@@ -133,6 +180,14 @@ h4 {
   transform: scale(0.97);
 }
 
+.section-orange .btn-primary {
+  background: var(--ink);
+  color: var(--text-dark-1);
+}
+.section-orange .btn-primary:hover {
+  background: var(--black-900);
+}
+
 .btn-ghost {
   display: inline-flex;
   align-items: center;
@@ -141,8 +196,8 @@ h4 {
   padding: 0 26px;
   border-radius: 12px;
   background: transparent;
-  border: 1px solid var(--border-hover);
-  color: var(--text-100);
+  border: 1px solid var(--border-dark-hover);
+  color: var(--text-dark-1);
   font-family: var(--font-inter);
   font-weight: 500;
   font-size: 16px;
@@ -150,28 +205,63 @@ h4 {
   transition: border-color 250ms ease, background-color 250ms ease;
 }
 .btn-ghost:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.35);
+}
+.section-light .btn-ghost {
+  border-color: var(--border-light-hover);
+  color: var(--text-lite-1);
+}
+.section-light .btn-ghost:hover {
+  background: rgba(10, 10, 10, 0.05);
+  border-color: rgba(10, 10, 10, 0.4);
+}
+.section-orange .btn-ghost {
+  border-color: rgba(10, 10, 10, 0.35);
+  color: var(--ink);
+}
+.section-orange .btn-ghost:hover {
+  background: rgba(10, 10, 10, 0.08);
 }
 
 /* Card */
 .card {
-  background: var(--surface-800);
-  border: 1px solid var(--border);
+  background: var(--surface-dark);
+  border: 1px solid var(--border-dark);
   border-radius: 24px;
   padding: 32px;
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-card-dark);
   transition: background-color 300ms ease, border-color 300ms ease, transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 .card:hover {
-  background: var(--surface-700);
-  border-color: var(--border-hover);
+  background: var(--surface-dark-hover);
+  border-color: var(--border-dark-hover);
   transform: translateY(-4px);
+}
+.section-light .card {
+  background: var(--surface-light);
+  border-color: var(--border-light);
+  box-shadow: var(--shadow-card-light);
+}
+.section-light .card:hover {
+  background: var(--surface-light);
+  border-color: var(--border-light-hover);
+}
+
+/* Orange seam — sits at the top of a section as it wipes over the previous one */
+.seam-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--orange-500);
+  transform-origin: left center;
 }
 
 ::selection {
   background: var(--orange-500);
-  color: #0a0a0a;
+  color: var(--ink);
 }
 
 :focus-visible {
@@ -184,10 +274,10 @@ h4 {
   width: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-950);
+  background: var(--black);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--border-hover);
+  background: var(--border-dark-hover);
   border-radius: 999px;
 }
 
@@ -207,6 +297,28 @@ h4 {
   }
   50% {
     transform: translate(-40px, 30px) scale(1.08);
+  }
+}
+
+@keyframes scroll-cue {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 1;
+  }
+}
+
+@keyframes cta-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.015);
   }
 }
 

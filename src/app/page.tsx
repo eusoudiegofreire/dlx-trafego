@@ -8,20 +8,37 @@ import Results from "@/components/sections/Results";
 import ForWho from "@/components/sections/ForWho";
 import CTAFinal from "@/components/sections/CTAFinal";
 import Footer from "@/components/sections/Footer";
+import StackSection from "@/components/ui/StackSection";
 
 export default function Home() {
   return (
     <>
       <Navbar />
       <main>
-        <Hero />
-        <Proof />
-        <Pain />
-        <Method />
-        <Platforms />
-        <Results />
-        <ForWho />
-        <CTAFinal />
+        <StackSection mode="dark" seam={false}>
+          <Hero />
+        </StackSection>
+        <StackSection mode="light">
+          <Proof />
+        </StackSection>
+        <StackSection mode="dark">
+          <Pain />
+        </StackSection>
+        <StackSection mode="light">
+          <Method />
+        </StackSection>
+        <StackSection mode="dark">
+          <Platforms />
+        </StackSection>
+        <StackSection mode="light">
+          <Results />
+        </StackSection>
+        <StackSection mode="dark">
+          <ForWho />
+        </StackSection>
+        <StackSection mode="orange" id="cta">
+          <CTAFinal />
+        </StackSection>
       </main>
       <Footer />
     </>

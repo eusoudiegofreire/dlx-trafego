@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import MotionProvider from "@/components/providers/MotionProvider";
+import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
 import { SITE_URL, site } from "@/config/site";
 
 export const metadata: Metadata = {
@@ -70,7 +71,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
       </head>
       <body>
-        <MotionProvider>{children}</MotionProvider>
+        <SmoothScrollProvider>
+          <MotionProvider>{children}</MotionProvider>
+        </SmoothScrollProvider>
       </body>
     </html>
   );
