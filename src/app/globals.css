@@ -1,0 +1,222 @@
+@import url("https://api.fontshare.com/v2/css?f[]=general-sans@500,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-bg-950: var(--bg-950);
+  --color-bg-900: var(--bg-900);
+  --color-surface-800: var(--surface-800);
+  --color-surface-700: var(--surface-700);
+  --color-orange-500: var(--orange-500);
+  --color-orange-400: var(--orange-400);
+  --color-text-100: var(--text-100);
+  --color-text-300: var(--text-300);
+  --color-text-500: var(--text-500);
+  --color-border: var(--border);
+  --color-border-hover: var(--border-hover);
+
+  --font-display: var(--font-general-sans);
+  --font-body: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
+}
+
+:root {
+  /* --- BASE (78%) --- */
+  --bg-950: #080808;
+  --bg-900: #0e0e0e;
+
+  /* --- SURFACE (15%) --- */
+  --surface-800: #151515;
+  --surface-700: #1c1c1c;
+
+  /* --- ACCENT (7% max) --- */
+  --orange-500: #ff5a1f;
+  --orange-400: #ff814d;
+  --orange-glow: rgba(255, 90, 31, 0.05);
+
+  /* --- TEXT --- */
+  --text-100: #f4f1ea;
+  --text-300: #a5a5a0;
+  --text-500: #8a8a83; /* bumped from brief's #6E6E68 for WCAG AA contrast on --bg-950 */
+
+  /* --- LINES --- */
+  --border: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(255, 255, 255, 0.16);
+
+  /* --- FONTS --- */
+  --font-general-sans: "General Sans", sans-serif;
+  --font-inter: "Inter", sans-serif;
+  --font-jetbrains: "JetBrains Mono", monospace;
+
+  /* --- SHADOWS --- */
+  --shadow-card: 0 20px 80px rgba(0, 0, 0, 0.4), 0 0 60px rgba(255, 90, 31, 0.04);
+
+  --section-py: clamp(4rem, 10vw, 8.75rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-950);
+  color: var(--text-100);
+  font-family: var(--font-inter);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-general-sans);
+  font-weight: 600;
+  color: var(--text-100);
+}
+
+/* Layout */
+.container-wide {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-inline: clamp(20px, 5vw, 48px);
+}
+
+.container-narrow {
+  max-width: 680px;
+}
+
+.section {
+  padding-block: var(--section-py);
+  position: relative;
+}
+
+/* Eyebrow label */
+.eyebrow {
+  font-family: var(--font-inter);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-500);
+}
+
+/* Buttons */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 56px;
+  padding: 0 22px 0 30px;
+  border-radius: 12px;
+  background: var(--orange-500);
+  color: #0a0a0a;
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 16px;
+  white-space: nowrap;
+  transition: background-color 250ms ease, transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-primary:hover {
+  background: var(--orange-400);
+  transform: translateY(-2px);
+}
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  height: 56px;
+  padding: 0 26px;
+  border-radius: 12px;
+  background: transparent;
+  border: 1px solid var(--border-hover);
+  color: var(--text-100);
+  font-family: var(--font-inter);
+  font-weight: 500;
+  font-size: 16px;
+  white-space: nowrap;
+  transition: border-color 250ms ease, background-color 250ms ease;
+}
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+/* Card */
+.card {
+  background: var(--surface-800);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: var(--shadow-card);
+  transition: background-color 300ms ease, border-color 300ms ease, transform 300ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+.card:hover {
+  background: var(--surface-700);
+  border-color: var(--border-hover);
+  transform: translateY(-4px);
+}
+
+::selection {
+  background: var(--orange-500);
+  color: #0a0a0a;
+}
+
+:focus-visible {
+  outline: 2px solid var(--orange-500);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-950);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-hover);
+  border-radius: 999px;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes ambient-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-40px, 30px) scale(1.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
