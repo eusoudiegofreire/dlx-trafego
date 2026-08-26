@@ -37,14 +37,14 @@ export default function KineticWord({ word }: { word: string }) {
   return (
     <div
       ref={sectionRef}
-      className="section-dark relative overflow-hidden h-[56vh] flex items-center justify-center"
+      className="section-dark relative overflow-hidden h-[38vh] flex items-center justify-center"
     >
       <p
         ref={wordRef}
         aria-hidden
         className="whitespace-nowrap [font-family:var(--font-general-sans)] font-semibold uppercase leading-none select-none"
         style={{
-          fontSize: "clamp(5rem, 18vw, 16rem)",
+          fontSize: "clamp(3.5rem, 12vw, 8.75rem)",
           color: "rgba(244,241,234,0.07)",
           WebkitTextStroke: "1px rgba(244,241,234,0.18)",
         }}

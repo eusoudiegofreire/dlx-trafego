@@ -108,7 +108,7 @@ export default function Hero() {
             DLX Digital · Tráfego Pago
           </p>
 
-          <h1 className="[font-family:var(--font-general-sans)] font-semibold uppercase text-[clamp(2.75rem,7.5vw,6.25rem)] leading-[0.94] tracking-tight">
+          <h1 className="[font-family:var(--font-general-sans)] font-semibold uppercase text-[clamp(2.5rem,8vw,5.25rem)] leading-[0.94] tracking-tight">
             {LINES.map((line, i) => (
               <span key={line.text} className="block overflow-hidden">
                 <span

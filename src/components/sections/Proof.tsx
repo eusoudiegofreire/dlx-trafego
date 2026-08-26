@@ -24,7 +24,7 @@ export default function Proof() {
       <div className="container-wide grid sm:grid-cols-3 gap-10 mb-20">
         {METRICS.map((m, i) => (
           <AnimatedSection key={m.label} delay={i * 0.1}>
-            <p className="[font-family:var(--font-general-sans)] font-semibold text-[clamp(2.75rem,5.5vw,4.5rem)] leading-none tracking-tight text-[var(--orange-500)]">
+            <p className="[font-family:var(--font-general-sans)] font-semibold text-[clamp(2.5rem,5vw,3.75rem)] leading-none tracking-tight text-[var(--orange-500)]">
               <CountUp
                 value={m.value}
                 decimals={m.decimals}

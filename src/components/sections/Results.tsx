@@ -107,7 +107,7 @@ export default function Results() {
           >
             {STATS.map((s, i) => (
               <div key={s.label}>
-                <p className="[font-family:var(--font-general-sans)] font-semibold text-[2.25rem] leading-none text-[var(--orange-500)]">
+                <p className="[font-family:var(--font-general-sans)] font-semibold text-[clamp(1.75rem,3.5vw,2.25rem)] leading-none text-[var(--orange-500)]">
                   <CountUp
                     value={s.value}
                     decimals={s.decimals}

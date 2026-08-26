@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import MotionProvider from "@/components/providers/MotionProvider";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
@@ -18,6 +19,18 @@ const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   variable: "--font-jetbrains",
+  display: "swap",
+});
+
+// Clash Display isn't on next/font/google or Fontsource — self-hosted from
+// the actual Fontshare files so it doesn't reintroduce a render-blocking
+// third-party request (same reasoning as the Inter migration above).
+const clashDisplay = localFont({
+  src: [
+    { path: "../fonts/ClashDisplay-Medium.woff2", weight: "500", style: "normal" },
+    { path: "../fonts/ClashDisplay-Semibold.woff2", weight: "600", style: "normal" },
+  ],
+  variable: "--font-clash-display",
   display: "swap",
 });
 
@@ -83,7 +96,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="pt-BR"
       suppressHydrationWarning
-      className={`${inter.variable} ${jetbrainsMono.variable}`}
+      className={`${inter.variable} ${jetbrainsMono.variable} ${clashDisplay.variable}`}
     >
       <head>
         <script
