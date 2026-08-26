@@ -22,7 +22,8 @@ export default function TiltCard({
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  const springConfig = { stiffness: 220, damping: 22 };
+  // critically damped — smooths the mouse-follow without any elastic overshoot
+  const springConfig = { stiffness: 220, damping: 30 };
   const rotateX = useSpring(useTransform(y, [-0.5, 0.5], [7, -7]), springConfig);
   const rotateY = useSpring(useTransform(x, [-0.5, 0.5], [-7, 7]), springConfig);
   const glowX = useTransform(x, [-0.5, 0.5], [0, 100]);

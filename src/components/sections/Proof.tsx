@@ -24,12 +24,13 @@ export default function Proof() {
       <div className="container-wide grid sm:grid-cols-3 gap-10 mb-20">
         {METRICS.map((m, i) => (
           <AnimatedSection key={m.label} delay={i * 0.1}>
-            <p className="[font-family:var(--font-general-sans)] font-semibold text-[clamp(2.75rem,5.5vw,4.5rem)] leading-none tracking-tight">
+            <p className="[font-family:var(--font-general-sans)] font-semibold text-[clamp(2.75rem,5.5vw,4.5rem)] leading-none tracking-tight text-[var(--orange-500)]">
               <CountUp
                 value={m.value}
                 decimals={m.decimals}
                 prefix={m.prefix}
                 suffix={m.suffix}
+                delay={i * 0.12}
               />
             </p>
             <p className="mt-4 text-[15px] text-muted max-w-[220px]">{m.label}</p>

@@ -1,6 +1,9 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import { Search, Rocket, SlidersHorizontal, BarChart3 } from "lucide-react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
-import DrawPath from "@/components/ui/DrawPath";
+import { useGsap, EASE } from "@/lib/gsap";
 
 const STEPS = [
   {
@@ -39,6 +42,62 @@ const STEPS = [
 ];
 
 export default function Method() {
+  const gridRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const pathRef = useRef<SVGPathElement>(null);
+  const { gsap, ScrollTrigger } = useGsap();
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[];
+    const path = pathRef.current;
+    const length = path?.getTotalLength() ?? 0;
+
+    if (path) {
+      path.style.strokeDasharray = `${length}`;
+    }
+
+    if (reduceMotion) {
+      gsap.set(cards, { opacity: 1, y: 0 });
+      if (path) gsap.set(path, { strokeDashoffset: 0 });
+      return;
+    }
+
+    const ctx = gsap.context(() => {
+      // one timeline: the connector draws itself while the bento cards
+      // stagger in diagonally (top-left → bottom-right)
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: gridRef.current,
+          start: "top 80%",
+          once: true,
+        },
+      });
+
+      if (path) {
+        tl.fromTo(
+          path,
+          { strokeDashoffset: length },
+          { strokeDashoffset: 0, duration: 1.3, ease: EASE.entrance },
+          0
+        );
+      }
+
+      STEPS.forEach((s, i) => {
+        const card = cards[i];
+        if (!card) return;
+        tl.fromTo(
+          card,
+          { opacity: 0, y: 32 },
+          { opacity: 1, y: 0, duration: 0.7, ease: EASE.entrance },
+          s.delay
+        );
+      });
+    }, gridRef);
+
+    return () => ctx.revert();
+  }, [gsap, ScrollTrigger]);
+
   return (
     <div id="metodo" className="section">
       <div className="container-wide">
@@ -51,19 +110,33 @@ export default function Method() {
           </h2>
         </AnimatedSection>
 
-        <div className="relative mt-14">
+        <div ref={gridRef} className="relative mt-14">
           <svg
             aria-hidden
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
             className="absolute inset-0 w-full h-full pointer-events-none hidden lg:block"
           >
-            <DrawPath d="M 25 15 L 70 15 L 70 65 L 12 65 L 12 82 L 37 82" />
+            <path
+              ref={pathRef}
+              d="M 25 15 L 70 15 L 70 65 L 12 65 L 12 82 L 37 82"
+              fill="none"
+              stroke="var(--orange-500)"
+              strokeOpacity={0.35}
+              strokeWidth={0.6}
+              strokeLinecap="round"
+            />
           </svg>
 
           <div className="relative grid lg:grid-cols-4 lg:grid-rows-2 gap-5">
-            {STEPS.map((s) => (
-              <AnimatedSection key={s.title} delay={s.delay} className={s.span}>
+            {STEPS.map((s, i) => (
+              <div
+                key={s.title}
+                ref={(el) => {
+                  cardRefs.current[i] = el;
+                }}
+                className={s.span}
+              >
                 <div
                   className={`card border-subtle h-full flex flex-col justify-between ${
                     s.tall ? "min-h-[280px]" : "min-h-[200px]"
@@ -80,7 +153,7 @@ export default function Method() {
                     <p className="text-muted text-[15px] leading-relaxed">{s.text}</p>
                   </div>
                 </div>
-              </AnimatedSection>
+              </div>
             ))}
           </div>
         </div>

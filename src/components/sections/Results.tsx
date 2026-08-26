@@ -1,11 +1,12 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import CountUp from "@/components/ui/CountUp";
 import WhatsAppMockup from "@/components/ui/WhatsAppMockup";
+import { useGsap, EASE } from "@/lib/gsap";
 import diegoRetrato from "../../../public/images/diego-retrato.webp";
 
 const STATS = [
@@ -15,22 +16,43 @@ const STATS = [
 ];
 
 export default function Results() {
-  const photoRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: photoRef,
-    offset: ["start end", "end start"],
-  });
-  const photoY = useTransform(scrollYProgress, [0, 1], [-40, 40]);
+  const photoBandRef = useRef<HTMLDivElement>(null);
+  const photoImgRef = useRef<HTMLDivElement>(null);
+  const { gsap, ScrollTrigger } = useGsap();
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion || !photoImgRef.current) return;
+
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        photoImgRef.current,
+        { y: -40 },
+        {
+          y: 40,
+          ease: EASE.scroll,
+          scrollTrigger: {
+            trigger: photoBandRef.current,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1,
+          },
+        }
+      );
+    }, photoBandRef);
+
+    return () => ctx.revert();
+  }, [gsap, ScrollTrigger]);
 
   return (
     <div className="section">
       <div className="container-wide">
         {/* editorial band — portrait with the quote overlapping it */}
         <div
-          ref={photoRef}
+          ref={photoBandRef}
           className="relative h-[480px] sm:h-[560px] rounded-[28px] overflow-hidden mb-16"
         >
-          <motion.div style={{ y: photoY }} className="absolute inset-[-10%]">
+          <div ref={photoImgRef} className="absolute inset-[-10%]">
             <Image
               src={diegoRetrato}
               alt="Diego, fundador da DLX Digital"
@@ -38,7 +60,7 @@ export default function Results() {
               className="object-cover"
               sizes="100vw"
             />
-          </motion.div>
+          </div>
           <div
             aria-hidden
             className="absolute inset-0"
@@ -83,10 +105,15 @@ export default function Results() {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="grid grid-cols-3 gap-6 max-w-[420px]"
           >
-            {STATS.map((s) => (
+            {STATS.map((s, i) => (
               <div key={s.label}>
-                <p className="[font-family:var(--font-general-sans)] font-semibold text-[2.25rem] leading-none">
-                  <CountUp value={s.value} decimals={s.decimals} suffix={s.suffix} />
+                <p className="[font-family:var(--font-general-sans)] font-semibold text-[2.25rem] leading-none text-[var(--orange-500)]">
+                  <CountUp
+                    value={s.value}
+                    decimals={s.decimals}
+                    suffix={s.suffix}
+                    delay={i * 0.12}
+                  />
                 </p>
                 <p className="mt-2 text-[13px] text-muted">{s.label}</p>
               </div>

@@ -60,6 +60,51 @@ function samplePath(segments: [Pt, Pt, Pt, Pt][], perSegment: number) {
 const { d: PATH_D, segments } = buildPath(CENTERS);
 const SAMPLED = samplePath(segments, 16);
 
+// Full loop = 4s travel + 0.8s hold (matches the old repeat/repeatDelay timing).
+// Position and opacity are pure CSS @keyframes on `transform`/`opacity` only —
+// no per-frame JS, no SVG geometry (cx/cy) mutation, so it's compositor-friendly
+// and costs ~nothing on the main thread (was a measurable Lighthouse TBT hit before).
+const CYCLE_S = 4.8;
+const TRAVEL_FRACTION = 4 / CYCLE_S;
+const ORIGIN = SAMPLED[0];
+
+function buildKeyframeCSS() {
+  const stops = new Map<string, string[]>();
+  const push = (pct: number, decl: string) => {
+    const key = pct.toFixed(3);
+    const arr = stops.get(key) ?? [];
+    arr.push(decl);
+    stops.set(key, arr);
+  };
+
+  SAMPLED.forEach((p, i) => {
+    const pct = (i / (SAMPLED.length - 1)) * TRAVEL_FRACTION * 100;
+    push(pct, `--pulse-x:${(p.x - ORIGIN.x).toFixed(2)}`);
+    push(pct, `--pulse-y:${(p.y - ORIGIN.y).toFixed(2)}`);
+  });
+
+  const opacityStops: [number, number][] = [
+    [0, 0],
+    [0.08, 1],
+    [0.5, 1],
+    [0.92, 1],
+    [1, 0],
+  ];
+  opacityStops.forEach(([f, op]) => {
+    push(f * TRAVEL_FRACTION * 100, `opacity:${op}`);
+  });
+  push(100, "opacity:0");
+
+  const body = [...stops.entries()]
+    .sort((a, b) => Number(a[0]) - Number(b[0]))
+    .map(([pct, decls]) => `${pct}%{${decls.join(";")}}`)
+    .join("");
+
+  return `@keyframes signature-pulse{${body}}`;
+}
+
+const PULSE_KEYFRAMES_CSS = buildKeyframeCSS();
+
 const FLOW_ALT =
   "Fluxo DLX: anúncio leva a clique, que vira contato no WhatsApp, que vira cliente.";
 
@@ -106,31 +151,28 @@ export default function SignatureFlow({
             <stop offset="0%" stopColor="rgba(255,255,255,0.05)" />
             <stop offset="100%" stopColor="rgba(255,255,255,0.015)" />
           </linearGradient>
+          <style>{`
+            ${PULSE_KEYFRAMES_CSS}
+            .signature-pulse {
+              --pulse-x: 0;
+              --pulse-y: 0;
+              transform: translate(calc(var(--pulse-x) * 1px), calc(var(--pulse-y) * 1px));
+              animation: signature-pulse ${CYCLE_S}s linear infinite;
+            }
+          `}</style>
         </defs>
 
         {/* connecting path */}
         <path d={PATH_D} fill="none" stroke="rgba(255,255,255,0.10)" strokeWidth="1.5" />
 
-        {/* traveling pulse */}
-        <motion.circle
+        {/* traveling pulse — position/opacity driven entirely by CSS (transform + opacity) */}
+        <circle
+          className="signature-pulse"
+          cx={ORIGIN.x}
+          cy={ORIGIN.y}
           r="6"
           fill="url(#pulse-gradient)"
-          initial={{ opacity: 0, cx: SAMPLED[0].x, cy: SAMPLED[0].y }}
-          animate={{
-            cx: SAMPLED.map((p) => p.x),
-            cy: SAMPLED.map((p) => p.y),
-            opacity: [0, 1, 1, 1, 0],
-          }}
-          transition={{
-            cx: { duration: 4, ease: "linear", repeat: Infinity, repeatDelay: 0.8 },
-            cy: { duration: 4, ease: "linear", repeat: Infinity, repeatDelay: 0.8 },
-            opacity: {
-              duration: 4,
-              times: [0, 0.08, 0.5, 0.92, 1],
-              repeat: Infinity,
-              repeatDelay: 0.8,
-            },
-          }}
+          opacity={0}
           style={{ filter: "drop-shadow(0 0 10px rgba(255,90,31,0.95))" }}
         />
 

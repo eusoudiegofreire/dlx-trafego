@@ -9,6 +9,7 @@ import ForWho from "@/components/sections/ForWho";
 import CTAFinal from "@/components/sections/CTAFinal";
 import Footer from "@/components/sections/Footer";
 import StackSection from "@/components/ui/StackSection";
+import KineticWord from "@/components/ui/KineticWord";
 
 export default function Home() {
   return (
@@ -27,7 +28,8 @@ export default function Home() {
         <StackSection mode="light">
           <Method />
         </StackSection>
-        <StackSection mode="dark">
+        <KineticWord word="RESULTADO" />
+        <StackSection mode="dark" seam={false}>
           <Platforms />
         </StackSection>
         <StackSection mode="light">

@@ -1,8 +1,28 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import Link from "next/link";
+import { useGsap, EASE } from "@/lib/gsap";
 
 export default function Navbar() {
+  const ref = useRef<HTMLElement>(null);
+  const { gsap } = useGsap();
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) {
+      gsap.set(ref.current, { opacity: 1, y: 0 });
+      return;
+    }
+    gsap.fromTo(
+      ref.current,
+      { opacity: 0, y: -15 },
+      { opacity: 1, y: 0, duration: 0.7, delay: 0.15, ease: EASE.entrance }
+    );
+  }, [gsap]);
+
   return (
-    <header className="fixed top-0 inset-x-0 z-[100] px-4 pt-4">
+    <header ref={ref} className="fixed top-0 inset-x-0 z-[100] px-4 pt-4 opacity-0">
       <div
         className="container-wide flex items-center justify-between h-[64px] rounded-full px-6 border border-white/10"
         style={{

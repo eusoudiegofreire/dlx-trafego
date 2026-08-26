@@ -1,30 +1,9 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useReducedMotion, type MotionValue } from "framer-motion";
+import { useEffect, useRef } from "react";
+import { useGsap, EASE } from "@/lib/gsap";
 
 type Segment = { text: string; className?: string };
-
-function Word({
-  children,
-  progress,
-  range,
-  className,
-}: {
-  children: string;
-  progress: MotionValue<number>;
-  range: [number, number];
-  className?: string;
-}) {
-  const opacity = useTransform(progress, range, [0.12, 1]);
-  const blur = useTransform(progress, range, [4, 0]);
-  const filter = useTransform(blur, (b) => `blur(${b}px)`);
-  return (
-    <motion.span style={{ opacity, filter }} className={`inline-block mr-[0.28em] ${className ?? ""}`}>
-      {children}
-    </motion.span>
-  );
-}
 
 export default function WordReveal({
   segments,
@@ -33,40 +12,61 @@ export default function WordReveal({
   segments: Segment[];
   className?: string;
 }) {
-  const ref = useRef<HTMLParagraphElement>(null);
-  const reduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 0.9", "start 0.35"],
-  });
+  const rootRef = useRef<HTMLParagraphElement>(null);
+  const wordRefs = useRef<(HTMLSpanElement | null)[]>([]);
+  const { gsap, ScrollTrigger } = useGsap();
 
   const words = segments.flatMap((seg) =>
     seg.text.split(" ").map((word) => ({ word, className: seg.className }))
   );
 
-  if (reduceMotion) {
-    return (
-      <p className={className}>
-        {segments.map((seg, i) => (
-          <span key={i} className={seg.className}>
-            {seg.text}
-          </span>
-        ))}
-      </p>
-    );
-  }
+  useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const els = wordRefs.current.filter(Boolean) as HTMLSpanElement[];
+
+    if (reduceMotion) {
+      gsap.set(els, { opacity: 1, filter: "blur(0px)" });
+      return;
+    }
+
+    const ctx = gsap.context(() => {
+      // scrub-linked mask reveal — each word gets an equal slice of the
+      // scroll range between the paragraph entering and nearing center
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: rootRef.current,
+          start: "top 90%",
+          end: "top 35%",
+          scrub: 1,
+        },
+      });
+
+      els.forEach((el, i) => {
+        tl.fromTo(
+          el,
+          { opacity: 0.12, filter: "blur(4px)" },
+          { opacity: 1, filter: "blur(0px)", duration: 1, ease: EASE.scroll },
+          i
+        );
+      });
+    }, rootRef);
+
+    return () => ctx.revert();
+  }, [gsap, ScrollTrigger]);
 
   return (
-    <p ref={ref} className={className}>
-      {words.map((w, i) => {
-        const start = i / words.length;
-        const end = start + 1 / words.length;
-        return (
-          <Word key={i} progress={scrollYProgress} range={[start, end]} className={w.className}>
-            {w.word}
-          </Word>
-        );
-      })}
+    <p ref={rootRef} className={className}>
+      {words.map((w, i) => (
+        <span
+          key={i}
+          ref={(el) => {
+            wordRefs.current[i] = el;
+          }}
+          className={`inline-block mr-[0.28em] ${w.className ?? ""}`}
+        >
+          {w.word}
+        </span>
+      ))}
     </p>
   );
 }

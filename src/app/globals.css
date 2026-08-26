@@ -1,5 +1,4 @@
 @import url("https://api.fontshare.com/v2/css?f[]=general-sans@500,600&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -44,9 +43,8 @@
   --ink: #0a0a0a;
 
   /* --- FONTS --- */
+  /* --font-inter and --font-jetbrains come from next/font (layout.tsx) */
   --font-general-sans: "General Sans", sans-serif;
-  --font-inter: "Inter", sans-serif;
-  --font-jetbrains: "JetBrains Mono", monospace;
 
   --shadow-card-dark: 0 20px 80px rgba(0, 0, 0, 0.4), 0 0 60px rgba(255, 90, 31, 0.05);
   --shadow-card-light: 0 20px 60px rgba(10, 10, 10, 0.08);
@@ -279,6 +277,15 @@ h4 {
 ::-webkit-scrollbar-thumb {
   background: var(--border-dark-hover);
   border-radius: 999px;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes marquee {

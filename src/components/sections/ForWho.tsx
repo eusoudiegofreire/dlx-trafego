@@ -42,7 +42,7 @@ export default function ForWho() {
                 <motion.div
                   className="mb-6 inline-block"
                   whileHover={{ scale: 1.15, rotate: -6 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                  transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <a.icon size={28} strokeWidth={1.5} className="text-[var(--orange-500)]" />
                 </motion.div>
