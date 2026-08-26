@@ -25,10 +25,7 @@ export default function Navbar() {
     <header ref={ref} className="fixed top-0 inset-x-0 z-[100] px-4 pt-4 opacity-0">
       <div
         className="container-wide flex items-center justify-between h-[64px] rounded-full px-6 border border-white/10"
-        style={{
-          background: "rgba(8,8,8,0.6)",
-          backdropFilter: "blur(16px)",
-        }}
+        style={{ background: "var(--black)" }}
       >
         <Link
           href="/"

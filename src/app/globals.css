@@ -62,6 +62,8 @@
 html {
   /* Lenis owns smooth scrolling — native smooth-scroll would fight it */
   scroll-behavior: auto;
+  /* keeps anchor targets (e.g. #metodo, #cta) from landing under the fixed navbar */
+  scroll-padding-top: 100px;
 }
 
 body {

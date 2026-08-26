@@ -29,7 +29,7 @@ export default function StackSection({
   return (
     <section
       id={id}
-      className={`relative overflow-hidden ${MODE_CLASS[mode]} ${
+      className={`relative overflow-hidden scroll-mt-[100px] ${MODE_CLASS[mode]} ${
         minHeight ? "min-h-screen" : ""
       } ${className}`}
     >
