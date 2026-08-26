@@ -18,7 +18,7 @@ const AUDIENCE = [
   {
     icon: Store,
     title: "Loja / varejo",
-    text: "Movimento na loja e no WhatsApp — não só seguidor.",
+    text: "Movimento de verdade na loja — não só seguidor.",
   },
 ];
 

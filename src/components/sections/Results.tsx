@@ -16,7 +16,7 @@ const STATS = [
 ];
 
 export default function Results() {
-  const photoBandRef = useRef<HTMLDivElement>(null);
+  const photoWrapRef = useRef<HTMLDivElement>(null);
   const photoImgRef = useRef<HTMLDivElement>(null);
   const { gsap, ScrollTrigger } = useGsap();
 
@@ -27,19 +27,19 @@ export default function Results() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         photoImgRef.current,
-        { y: -40 },
+        { y: -30 },
         {
-          y: 40,
+          y: 30,
           ease: EASE.scroll,
           scrollTrigger: {
-            trigger: photoBandRef.current,
+            trigger: photoWrapRef.current,
             start: "top bottom",
             end: "bottom top",
             scrub: 1,
           },
         }
       );
-    }, photoBandRef);
+    }, photoWrapRef);
 
     return () => ctx.revert();
   }, [gsap, ScrollTrigger]);
@@ -47,43 +47,39 @@ export default function Results() {
   return (
     <div className="section">
       <div className="container-wide">
-        {/* editorial band — portrait with the quote overlapping it */}
-        <div
-          ref={photoBandRef}
-          className="relative h-[480px] sm:h-[560px] rounded-[28px] overflow-hidden mb-16"
-        >
-          <div ref={photoImgRef} className="absolute inset-[-10%]">
-            <Image
-              src={diegoRetrato}
-              alt="Diego, fundador da DLX Digital"
-              fill
-              className="object-cover"
-              sizes="100vw"
-            />
-          </div>
-          <div
-            aria-hidden
-            className="absolute inset-0"
-            style={{
-              background:
-                "linear-gradient(100deg, rgba(8,8,8,.88) 0%, rgba(8,8,8,.55) 38%, transparent 68%)",
-            }}
-          />
-          <div className="relative h-full flex flex-col justify-end p-8 sm:p-14 max-w-[640px]">
+        {/* founder — text left, portrait right */}
+        <div className="grid lg:grid-cols-[1fr_0.85fr] gap-14 items-center mb-20">
+          <div>
             <AnimatedSection>
-              <p className="eyebrow mb-4 text-[var(--text-dark-2)]!">Resultado</p>
+              <p className="eyebrow mb-4">Resultado</p>
             </AnimatedSection>
             <AnimatedSection delay={0.06}>
-              <blockquote className="[font-family:var(--font-general-sans)] font-medium text-[clamp(1.5rem,3.4vw,2.5rem)] leading-[1.2] text-[var(--text-dark-1)]">
-                &ldquo;Antes eu só via curtida. Depois que a DLX assumiu, o
-                WhatsApp não para — e a agenda também não.&rdquo;
+              <blockquote className="[font-family:var(--font-general-sans)] font-medium text-[clamp(1.5rem,3vw,2.25rem)] leading-[1.25] max-w-[520px]">
+                &ldquo;Não trabalho pra você ter curtida. Trabalho pra levar o
+                cliente certo até onde a venda acontece — no canal que faz
+                sentido pro seu negócio.&rdquo;
               </blockquote>
             </AnimatedSection>
             <AnimatedSection delay={0.12}>
-              <p className="mt-5 text-[14px] text-[var(--text-dark-2)]">
-                Diego · Fundador, DLX Digital
+              <p className="mt-5 text-[14px] text-muted">
+                Diego Freire · Fundador da DLX Digital
               </p>
             </AnimatedSection>
+          </div>
+
+          <div
+            ref={photoWrapRef}
+            className="relative aspect-[4/5] rounded-[28px] overflow-hidden border-subtle border"
+          >
+            <div ref={photoImgRef} className="absolute inset-[-8%]">
+              <Image
+                src={diegoRetrato}
+                alt="Diego Freire, fundador da DLX Digital"
+                fill
+                className="object-cover"
+                sizes="(min-width: 1024px) 40vw, 100vw"
+              />
+            </div>
           </div>
         </div>
 

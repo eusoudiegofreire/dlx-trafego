@@ -7,7 +7,7 @@ import fluxoDlx from "../../../public/images/fluxo-dlx.webp";
 const NODES = [
   { label: "Anúncio", sub: "Meta / Google" },
   { label: "Clique", sub: "Interesse" },
-  { label: "WhatsApp", sub: "Contato" },
+  { label: "Contato", sub: "Canal certo" },
   { label: "Cliente", sub: "Venda" },
 ];
 
@@ -106,7 +106,7 @@ function buildKeyframeCSS() {
 const PULSE_KEYFRAMES_CSS = buildKeyframeCSS();
 
 const FLOW_ALT =
-  "Fluxo DLX: anúncio leva a clique, que vira contato no WhatsApp, que vira cliente.";
+  "Fluxo DLX: anúncio leva a clique, que vira contato no canal certo, que vira cliente.";
 
 export default function SignatureFlow({
   size = "large",
