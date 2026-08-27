@@ -128,9 +128,9 @@ export default function Hero() {
 
           {/* CSS-only, not gated behind GSAP/JS — keeps this out of LCP's render-delay */}
           <p className="container-narrow mt-5 text-[18px] leading-[1.5] text-muted motion-safe:animate-[fade-in_0.4s_ease-out_0.1s_both]">
-            Anúncio no Meta e no Google feito pra trazer cliente de verdade —
-            mensagem no WhatsApp, pedido no delivery, contato no direct. Não
-            curtida que não paga conta.
+            Anúncio no Meta e no Google feito pra trazer cliente de verdade,
+            não curtida que não paga conta. É contato real, no canal que faz
+            sentido pro seu negócio.
           </p>
 
           <div ref={ctaRef} className="mt-7 flex flex-wrap items-center gap-4 opacity-0">

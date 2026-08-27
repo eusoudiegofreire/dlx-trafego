@@ -46,8 +46,9 @@ export default function ForWho() {
         </AnimatedSection>
         <AnimatedSection delay={0.08}>
           <p className="text-muted text-[17px] leading-relaxed max-w-[640px] mb-14">
-            Sou generalista em negócio local — atendo vários ramos. Se o seu
-            vive de contato e cliente na região, provavelmente é pra você:
+            Sou generalista em negócio local: atendo vários ramos diferentes.
+            Se o seu vive de contato e cliente na região, provavelmente é pra
+            você:
           </p>
         </AnimatedSection>
 

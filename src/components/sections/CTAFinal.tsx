@@ -39,8 +39,8 @@ export default function CTAFinal() {
           <AnimatedSection delay={0.1}>
             <p className="mt-6 text-muted max-w-[440px] text-[17px]">
               Me manda uma mensagem. A gente olha teu negócio e monta um
-              plano de tráfego pra trazer cliente de verdade — sem promessa
-              mágica, com resultado que dá pra medir.
+              plano de tráfego que traz o contato certo pro seu canal, sem
+              promessa mágica e com número que dá pra acompanhar.
             </p>
           </AnimatedSection>
         </div>

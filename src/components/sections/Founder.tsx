@@ -47,7 +47,7 @@ export default function Founder() {
             <AnimatedSection delay={0.06}>
               <blockquote className="[font-family:var(--font-general-sans)] font-medium text-[clamp(1.5rem,3vw,2.25rem)] leading-[1.25] max-w-[520px]">
                 &ldquo;Não trabalho pra você ter curtida. Trabalho pra levar o
-                cliente certo até onde a venda acontece — no canal que faz
+                cliente certo até onde a venda acontece, no canal que faz
                 sentido pro seu negócio.&rdquo;
               </blockquote>
             </AnimatedSection>
