@@ -6,7 +6,7 @@ import Method from "@/components/sections/Method";
 import Differentiator from "@/components/sections/Differentiator";
 import Founder from "@/components/sections/Founder";
 import ForWho from "@/components/sections/ForWho";
-import Objections from "@/components/sections/Objections";
+import Faq from "@/components/sections/Faq";
 import CTAFinal from "@/components/sections/CTAFinal";
 import Footer from "@/components/sections/Footer";
 import StackSection from "@/components/ui/StackSection";
@@ -39,8 +39,8 @@ export default function Home() {
         <StackSection mode="dark">
           <ForWho />
         </StackSection>
-        <StackSection mode="light">
-          <Objections />
+        <StackSection mode="dark" seam={false}>
+          <Faq />
         </StackSection>
         <StackSection mode="orange" id="cta">
           <CTAFinal />
