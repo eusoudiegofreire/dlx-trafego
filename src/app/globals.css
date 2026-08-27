@@ -300,6 +300,18 @@ h4 {
   }
 }
 
+/* track = 5 identical copies of the logo set; shifting by exactly one
+   copy's width (20%) and looping keeps the seam invisible regardless of
+   viewport width */
+@keyframes logo-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-20%);
+  }
+}
+
 @keyframes ambient-drift {
   0%,
   100% {

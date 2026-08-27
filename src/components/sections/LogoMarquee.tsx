@@ -16,7 +16,11 @@ const LOGOS = [
 ];
 
 export default function LogoMarquee() {
-  const loop = [...LOGOS, ...LOGOS];
+  // 5 copies so the track stays wider than the viewport even on large
+  // desktop monitors (~2560px) — with only 6 logos, 2 copies left a gap
+  // on wide screens once the track scrolled past one copy's width, since
+  // a single copy is narrower than most viewports.
+  const loop = [...LOGOS, ...LOGOS, ...LOGOS, ...LOGOS, ...LOGOS];
 
   return (
     <div className="py-16">
@@ -31,7 +35,7 @@ export default function LogoMarquee() {
             "linear-gradient(90deg, transparent, black 10%, black 90%, transparent)",
         }}
       >
-        <div className="flex gap-5 w-max motion-safe:animate-[marquee_36s_linear_infinite] group-hover:[animation-play-state:paused]">
+        <div className="flex gap-5 w-max motion-safe:animate-[logo-marquee_36s_linear_infinite] group-hover:[animation-play-state:paused]">
           {loop.map((logo, i) => (
             <div
               key={`${logo.alt}-${i}`}
