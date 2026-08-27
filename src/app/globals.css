@@ -149,9 +149,13 @@ h4 {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-.section-dark .eyebrow,
-.section-orange .eyebrow {
+.section-dark .eyebrow {
   color: color-mix(in oklab, currentColor 60%, transparent);
+}
+.section-orange .eyebrow {
+  /* orange bg needs a darker mix than the dark/light sections to clear
+     WCAG AA (60% mix measured ~3.4:1; 80% lands ~5:1) */
+  color: color-mix(in oklab, currentColor 80%, transparent);
 }
 .section-light .eyebrow {
   color: var(--text-lite-2);
