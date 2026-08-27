@@ -110,7 +110,7 @@ export default function Method() {
         </AnimatedSection>
         <AnimatedSection delay={0.05}>
           <h2 className="text-[clamp(2.25rem,5vw,3.75rem)] leading-[1.02] max-w-[640px]">
-            Quatro etapas. Sem achismo.
+            Quatro etapas.
           </h2>
         </AnimatedSection>
 

@@ -65,8 +65,7 @@ export default function ForWho() {
 
         <AnimatedSection delay={0.1 * AUDIENCE.length}>
           <p className="mt-10 text-faint text-[13px] italic">
-            Foco em negócio local. Não trabalho com e-commerce / venda 100%
-            online.
+            Foco em negócio local. Não trabalho com e-commerce.
           </p>
         </AnimatedSection>
       </div>
