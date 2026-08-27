@@ -47,12 +47,12 @@ export default function Faq() {
             const isOpen = openIndex === i;
             return (
               <AnimatedSection key={item.q} delay={0.1 + i * 0.06} className="first:pt-0">
-                <div className="py-6">
+                <div>
                   <button
                     type="button"
                     onClick={() => setOpenIndex(isOpen ? null : i)}
                     aria-expanded={isOpen}
-                    className="w-full flex items-center justify-between gap-6 text-left"
+                    className="w-full flex items-center justify-between gap-6 text-left py-6"
                   >
                     <span className="[font-family:var(--font-general-sans)] font-semibold text-[clamp(1.1rem,2.2vw,1.35rem)] leading-snug">
                       {item.q}
@@ -70,7 +70,7 @@ export default function Faq() {
                     style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
                   >
                     <div className="overflow-hidden">
-                      <p className="text-muted text-[15px] leading-relaxed pt-4 max-w-[640px]">
+                      <p className="text-muted text-[15px] leading-relaxed pb-6 max-w-[640px]">
                         {item.a}
                       </p>
                     </div>
