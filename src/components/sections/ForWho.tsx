@@ -40,16 +40,9 @@ export default function ForWho() {
           <p className="eyebrow mb-4">Feito pra quem vive do cliente local</p>
         </AnimatedSection>
         <AnimatedSection delay={0.05}>
-          <h2 className="text-[clamp(2.25rem,5vw,3.75rem)] leading-[1.02] max-w-[640px] mb-6">
-            Se o seu negócio depende de gente chegando, a gente combina.
+          <h2 className="text-[clamp(2.25rem,5vw,3.75rem)] leading-[1.02] max-w-[640px] mb-14">
+            Se cliente é o que move seu negócio, você está no lugar certo.
           </h2>
-        </AnimatedSection>
-        <AnimatedSection delay={0.08}>
-          <p className="text-muted text-[17px] leading-relaxed max-w-[640px] mb-14">
-            Sou generalista em negócio local: atendo vários ramos diferentes.
-            Se o seu vive de contato e cliente na região, provavelmente é pra
-            você:
-          </p>
         </AnimatedSection>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
