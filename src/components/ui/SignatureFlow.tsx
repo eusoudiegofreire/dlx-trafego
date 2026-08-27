@@ -8,7 +8,7 @@ const NODES = [
   { label: "Anúncio", sub: "Meta / Google" },
   { label: "Clique", sub: "Interesse" },
   { label: "Contato", sub: "Canal certo" },
-  { label: "Cliente", sub: "Venda" },
+  { label: "Cliente", sub: "No seu canal" },
 ];
 
 const NODE_W = 132;
