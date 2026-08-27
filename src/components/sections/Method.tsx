@@ -13,7 +13,7 @@ const STEPS = [
     icon: Search,
     step: "01",
     title: "Diagnóstico",
-    text: "Entendemos seu negócio, ticket e público antes de gastar R$1.",
+    text: "Antes de gastar R$1, a gente entende teu negócio, teu ticket e quem é teu cliente. Anúncio sem isso é aposta.",
     span: "lg:col-span-2",
     wide: true,
     delay: 0,
@@ -22,7 +22,7 @@ const STEPS = [
     icon: Rocket,
     step: "02",
     title: "Campanha",
-    text: "Criativos e segmentação feitos pra vender, não pra viralizar.",
+    text: "Criativo e segmentação feitos pra vender, não pra viralizar. A mensagem certa pra pessoa certa.",
     span: "lg:col-span-1",
     delay: 0.14,
   },
@@ -30,7 +30,7 @@ const STEPS = [
     icon: SlidersHorizontal,
     step: "03",
     title: "Otimização",
-    text: "Ajuste diário do que traz contato barato — e corte do que não traz.",
+    text: "Ajuste constante: a gente corta o que traz curtida e reforça o que traz contato barato. Todo dia de olho.",
     span: "lg:col-span-1",
     delay: 0.22,
   },
@@ -38,7 +38,7 @@ const STEPS = [
     icon: BarChart3,
     step: "04",
     title: "Resultado",
-    text: "Relatório claro: quanto entrou, quanto saiu, quantos clientes.",
+    text: "Relatório claro: quanto entrou, quanto saiu, quantos contatos chegaram. Sem enrolação, sem métrica de vaidade.",
     span: "lg:col-span-2",
     wide: true,
     delay: 0.34,
@@ -110,7 +110,7 @@ export default function Method() {
         </AnimatedSection>
         <AnimatedSection delay={0.05}>
           <h2 className="text-[clamp(2.25rem,5vw,3.75rem)] leading-[1.02] max-w-[640px]">
-            Quatro etapas, sem enrolação.
+            Quatro etapas. Sem achismo.
           </h2>
         </AnimatedSection>
 

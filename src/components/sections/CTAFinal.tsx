@@ -33,13 +33,14 @@ export default function CTAFinal() {
           </AnimatedSection>
           <AnimatedSection delay={0.05}>
             <h2 className="[font-family:var(--font-general-sans)] font-semibold text-[clamp(2.5rem,6vw,4.25rem)] leading-[0.98] max-w-[560px]">
-              Bora colocar mais gente pra dentro do seu negócio?
+              Chega de gastar com anúncio que não volta.
             </h2>
           </AnimatedSection>
           <AnimatedSection delay={0.1}>
             <p className="mt-6 text-muted max-w-[440px] text-[17px]">
-              Preenche rapidinho e a gente chama você no WhatsApp com um
-              diagnóstico inicial — sem compromisso.
+              Me manda uma mensagem. A gente olha teu negócio e monta um
+              plano de tráfego pra trazer cliente de verdade — sem promessa
+              mágica, com resultado que dá pra medir.
             </p>
           </AnimatedSection>
         </div>
@@ -81,6 +82,9 @@ export default function CTAFinal() {
               Quero meu orçamento
               <ArrowRight size={18} strokeWidth={1.75} />
             </button>
+            <p className="text-center text-[13px] text-faint">
+              Resposta no mesmo dia · Sem compromisso
+            </p>
           </form>
         </AnimatedSection>
       </motion.div>

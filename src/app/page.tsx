@@ -1,11 +1,12 @@
 import Navbar from "@/components/sections/Navbar";
 import Hero from "@/components/sections/Hero";
-import Proof from "@/components/sections/Proof";
+import LogoMarquee from "@/components/sections/LogoMarquee";
 import Pain from "@/components/sections/Pain";
 import Method from "@/components/sections/Method";
-import Platforms from "@/components/sections/Platforms";
-import Results from "@/components/sections/Results";
+import Differentiator from "@/components/sections/Differentiator";
+import Founder from "@/components/sections/Founder";
 import ForWho from "@/components/sections/ForWho";
+import Objections from "@/components/sections/Objections";
 import CTAFinal from "@/components/sections/CTAFinal";
 import Footer from "@/components/sections/Footer";
 import StackSection from "@/components/ui/StackSection";
@@ -19,24 +20,27 @@ export default function Home() {
         <StackSection mode="dark" seam={false}>
           <Hero />
         </StackSection>
-        <StackSection mode="light">
-          <Proof />
+        <StackSection mode="dark" seam={false} minHeight={false} id="prova">
+          <LogoMarquee />
         </StackSection>
-        <StackSection mode="dark">
+        <StackSection mode="dark" seam={false}>
           <Pain />
         </StackSection>
         <StackSection mode="light">
           <Method />
         </StackSection>
-        <KineticWord word="RESULTADO" />
-        <StackSection mode="dark" seam={false}>
-          <Platforms />
+        <StackSection mode="dark">
+          <Differentiator />
         </StackSection>
+        <KineticWord word="RESULTADO" />
         <StackSection mode="light">
-          <Results />
+          <Founder />
         </StackSection>
         <StackSection mode="dark">
           <ForWho />
+        </StackSection>
+        <StackSection mode="light">
+          <Objections />
         </StackSection>
         <StackSection mode="orange" id="cta">
           <CTAFinal />

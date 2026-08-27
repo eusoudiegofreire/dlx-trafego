@@ -8,17 +8,17 @@ const AUDIENCE = [
   {
     icon: Stethoscope,
     title: "Clínica odonto / estética",
-    text: "Agenda cheia de paciente que fecha tratamento.",
+    text: "Agenda cheia de paciente que fecha tratamento, não só quem pede orçamento e some.",
   },
   {
     icon: UtensilsCrossed,
-    title: "Restaurante",
-    text: "Mais pedido e mesa cheia nos dias fracos.",
+    title: "Restaurante / delivery",
+    text: "Mais pedido pelo cardápio e pelo Google, principalmente nos dias fracos.",
   },
   {
     icon: Store,
     title: "Loja / varejo",
-    text: "Movimento de verdade na loja — não só seguidor.",
+    text: "Movimento no direct e na loja — cliente comprando, não só seguidor novo.",
   },
 ];
 
@@ -31,7 +31,7 @@ export default function ForWho() {
         </AnimatedSection>
         <AnimatedSection delay={0.05}>
           <h2 className="text-[clamp(2.25rem,5vw,3.75rem)] leading-[1.02] max-w-[640px] mb-14">
-            Negócio local que precisa de gente na porta.
+            Se você vive de cliente entrando, é pra você.
           </h2>
         </AnimatedSection>
 

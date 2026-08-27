@@ -3,7 +3,7 @@ import SignatureFlow from "@/components/ui/SignatureFlow";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { site } from "@/config/site";
 
-const UPCOMING = ["Criação de Site", "Automação", "Link na bio"];
+const UPCOMING = ["Criação de Site", "Automação"];
 
 export default function Footer() {
   return (
@@ -15,10 +15,10 @@ export default function Footer() {
               DLX <span className="text-[var(--orange-500)]">Digital</span>
             </p>
             <p className="text-faint text-[14px] max-w-[340px] mb-8">
-              Tráfego pago para negócios locais em Rondônia e Amazonas.
+              Tráfego que vira cliente.
             </p>
 
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 mb-6">
               <a
                 href={site.whatsapp}
                 target="_blank"
@@ -36,6 +36,10 @@ export default function Footer() {
                 {site.instagramHandle}
               </a>
             </div>
+
+            <p className="text-faint text-[12px] tracking-wide">
+              Anúncios via Meta Ads · Google Ads
+            </p>
           </div>
 
           <div>

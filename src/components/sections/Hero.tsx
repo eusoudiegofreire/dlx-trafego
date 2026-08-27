@@ -128,8 +128,9 @@ export default function Hero() {
 
           {/* CSS-only, not gated behind GSAP/JS — keeps this out of LCP's render-delay */}
           <p className="container-narrow mt-5 text-[18px] leading-[1.5] text-muted motion-safe:animate-[fade-in_0.4s_ease-out_0.1s_both]">
-            Anúncios no Meta e Google que trazem gente certa pra dentro do seu
-            negócio — não só curtida.
+            Anúncio no Meta e no Google feito pra trazer cliente de verdade —
+            mensagem no WhatsApp, pedido no delivery, contato no direct. Não
+            curtida que não paga conta.
           </p>
 
           <div ref={ctaRef} className="mt-7 flex flex-wrap items-center gap-4 opacity-0">
@@ -137,8 +138,8 @@ export default function Hero() {
               Quero meu orçamento
               <ArrowRight size={18} strokeWidth={1.75} />
             </a>
-            <a href="#metodo" className="btn-ghost">
-              Ver como funciona
+            <a href="#prova" className="btn-ghost">
+              Ver resultados reais
             </a>
           </div>
         </div>
