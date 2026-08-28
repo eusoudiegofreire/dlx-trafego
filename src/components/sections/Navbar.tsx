@@ -2,7 +2,9 @@
 
 import { useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useGsap, EASE } from "@/lib/gsap";
+import logoDlx from "../../../public/images/logo-dlx.webp";
 
 export default function Navbar() {
   const ref = useRef<HTMLElement>(null);
@@ -27,11 +29,13 @@ export default function Navbar() {
         className="container-wide flex items-center justify-between h-[64px] rounded-full px-6 border border-white/10"
         style={{ background: "var(--black)" }}
       >
-        <Link
-          href="/"
-          className="[font-family:var(--font-general-sans)] font-semibold text-[17px] tracking-tight text-white"
-        >
-          DLX Digital
+        <Link href="/" className="flex items-center shrink-0">
+          <Image
+            src={logoDlx}
+            alt="DLX Digital"
+            priority
+            className="h-7 sm:h-9 w-auto"
+          />
         </Link>
         <Link
           href="#cta"
