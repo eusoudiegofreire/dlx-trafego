@@ -12,9 +12,9 @@ export default function CTAFinal() {
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    const message = `Olá! Meu nome é ${name || "—"} (WhatsApp: ${
-      whatsapp || "—"
-    }) e quero um orçamento de Tráfego Pago com a DLX Digital.`;
+    const message = `Olá! Meu nome é ${
+      name || "—"
+    } e quero um orçamento de Tráfego Pago com a DLX Digital.`;
     window.open(`${site.whatsapp}?text=${encodeURIComponent(message)}`, "_blank");
   }
 
@@ -33,7 +33,7 @@ export default function CTAFinal() {
           </AnimatedSection>
           <AnimatedSection delay={0.05}>
             <h2 className="[font-family:var(--font-general-sans)] font-semibold text-[clamp(2.5rem,6vw,4.25rem)] leading-[0.98] max-w-[560px]">
-              Chega de gastar com anúncio que não volta.
+              Bora levar mais gente certa pro seu negócio?
             </h2>
           </AnimatedSection>
           <AnimatedSection delay={0.1}>
