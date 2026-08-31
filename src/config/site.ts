@@ -8,6 +8,8 @@ export const site = {
   offer: "Tráfego Pago",
   instagram: "https://instagram.com/dlxdigitaloficial",
   instagramHandle: "@dlxdigitaloficial",
+  instagramDiego: "https://www.instagram.com/eusoudiegofreire/",
+  instagramDiegoHandle: "@eusoudiegofreire",
   whatsapp: "https://wa.me/5569992487348",
   areaServed: ["Rondônia", "Amazonas"],
   locale: "pt_BR",
@@ -19,8 +21,5 @@ export const site = {
   bio: {
     tagline: "Mais visibilidade, mais contato, mais cliente pro seu negócio local.",
   },
-  // TODO(diego): substituir pelo link real de avaliação do Google Meu
-  // Negócio antes do deploy — "#" é só placeholder, não manda pra lugar
-  // nenhum ainda.
-  googleReviewUrl: "#",
+  googleReviewUrl: "https://g.page/r/CUWZcShGc_3LEBM/review",
 } as const;

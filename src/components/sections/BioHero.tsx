@@ -41,6 +41,13 @@ const LINKS = [
     icon: InstagramIcon,
     primary: false,
   },
+  {
+    key: "instagram-diego",
+    label: site.instagramDiegoHandle,
+    href: site.instagramDiego,
+    icon: InstagramIcon,
+    primary: false,
+  },
 ] as const;
 
 export default function BioHero() {
