@@ -108,7 +108,7 @@ export default function BioHero() {
   }, [gsap]);
 
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center px-6 py-20 overflow-hidden">
+    <div className="relative flex flex-col items-center justify-center px-6 pt-20 pb-10 overflow-hidden">
       {/* slow ambient orange haze — keeps the black from reading flat */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div
