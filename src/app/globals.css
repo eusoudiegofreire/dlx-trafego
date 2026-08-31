@@ -348,6 +348,19 @@ h4 {
   }
 }
 
+/* slow glow on the bio page's primary link — draws the eye without
+   shouting; box-shadow only (no layout impact), one element, not
+   scroll-linked, so the perf cost is negligible */
+@keyframes link-glow-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 90, 31, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 28px 6px rgba(255, 90, 31, 0.3);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

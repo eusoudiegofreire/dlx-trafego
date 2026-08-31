@@ -29,7 +29,7 @@ export default function Navbar() {
         className="container-wide flex items-center justify-between h-[64px] rounded-full px-6 border border-white/10"
         style={{ background: "var(--black)" }}
       >
-        <Link href="/" className="flex items-center shrink-0">
+        <Link href="/trafego" className="flex items-center shrink-0">
           <Image
             src={logoDlx}
             alt="DLX Digital"

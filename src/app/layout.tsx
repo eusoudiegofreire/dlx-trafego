@@ -34,60 +34,21 @@ const clashDisplay = localFont({
   display: "swap",
 });
 
+// Shared fallback only — each route (app/page.tsx for the bio hub,
+// app/trafego/page.tsx for the paid-traffic landing) exports its own
+// full metadata (title, description, OG/Twitter, JSON-LD) since they're
+// different pages with different purposes now that the site is
+// multi-route. This is just what renders if a route somehow doesn't
+// override it.
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: site.title,
+    default: site.name,
     template: `%s | ${site.name}`,
-  },
-  description: site.description,
-  keywords: [
-    "tráfego pago",
-    "gestão de anúncios",
-    "Meta Ads",
-    "Google Ads",
-    "marketing digital Rondônia",
-    "agência de tráfego pago",
-  ],
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    title: site.title,
-    description: site.description,
-    url: SITE_URL,
-    siteName: site.name,
-    locale: site.locale,
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: site.title,
-    description: site.description,
   },
   robots: {
     index: true,
     follow: true,
-  },
-};
-
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "@id": `${SITE_URL}/#organization`,
-  name: site.name,
-  url: SITE_URL,
-  description: site.description,
-  areaServed: site.areaServed,
-  sameAs: [site.instagram],
-  makesOffer: {
-    "@type": "Offer",
-    itemOffered: {
-      "@type": "Service",
-      name: "Tráfego Pago (Meta Ads e Google Ads)",
-      description:
-        "Gestão de campanhas de anúncios pagos para negócios locais, com diagnóstico, criação de campanha, otimização diária e relatório de resultados.",
-    },
   },
 };
 
@@ -98,12 +59,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
       className={`${inter.variable} ${jetbrainsMono.variable} ${clashDisplay.variable}`}
     >
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-      </head>
       <body>
         <SmoothScrollProvider>
           <MotionProvider>{children}</MotionProvider>

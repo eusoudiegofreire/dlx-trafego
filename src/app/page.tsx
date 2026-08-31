@@ -1,52 +1,58 @@
-import Navbar from "@/components/sections/Navbar";
-import Hero from "@/components/sections/Hero";
+import type { Metadata } from "next";
+import BioHero from "@/components/sections/BioHero";
 import LogoMarquee from "@/components/sections/LogoMarquee";
-import Pain from "@/components/sections/Pain";
-import Method from "@/components/sections/Method";
-import Differentiator from "@/components/sections/Differentiator";
-import Founder from "@/components/sections/Founder";
-import ForWho from "@/components/sections/ForWho";
-import Faq from "@/components/sections/Faq";
-import CTAFinal from "@/components/sections/CTAFinal";
-import Footer from "@/components/sections/Footer";
-import StackSection from "@/components/ui/StackSection";
-import KineticWord from "@/components/ui/KineticWord";
+import { SITE_URL, site } from "@/config/site";
 
-export default function Home() {
+export const metadata: Metadata = {
+  // no `title` here on purpose — inherits the root layout's
+  // `default: site.name` ("DLX Digital") instead of going through the
+  // "%s | DLX Digital" template, which would duplicate the brand name
+  description: site.bio.tagline,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: site.name,
+    description: site.bio.tagline,
+    url: SITE_URL,
+    siteName: site.name,
+    locale: site.locale,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: site.name,
+    description: site.bio.tagline,
+  },
+};
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": `${SITE_URL}/#organization`,
+  name: site.name,
+  url: SITE_URL,
+  description: site.bio.tagline,
+  areaServed: site.areaServed,
+  sameAs: [site.instagram],
+};
+
+export default function BioPage() {
   return (
     <>
-      <Navbar />
-      <main>
-        <StackSection mode="dark" seam={false}>
-          <Hero />
-        </StackSection>
-        <StackSection mode="dark" seam={false} minHeight={false} id="prova">
-          <LogoMarquee />
-        </StackSection>
-        <StackSection mode="dark" seam={false}>
-          <Pain />
-        </StackSection>
-        <StackSection mode="light">
-          <Method />
-        </StackSection>
-        <StackSection mode="dark">
-          <Differentiator />
-        </StackSection>
-        <KineticWord word="RESULTADO" />
-        <StackSection mode="light">
-          <Founder />
-        </StackSection>
-        <StackSection mode="dark">
-          <ForWho />
-        </StackSection>
-        <StackSection mode="dark" seam={false}>
-          <Faq />
-        </StackSection>
-        <StackSection mode="orange" id="cta">
-          <CTAFinal />
-        </StackSection>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <main className="section-dark min-h-screen flex flex-col">
+        <BioHero />
+        <LogoMarquee />
+        <footer className="pb-10 text-center">
+          <p className="text-faint text-[12px]">
+            © {new Date().getFullYear()} DLX Digital
+          </p>
+        </footer>
       </main>
-      <Footer />
     </>
   );
 }
