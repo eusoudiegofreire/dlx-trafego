@@ -141,9 +141,9 @@ export default function BioHero() {
 
       <p
         ref={nameRef}
-        className="mt-6 [font-family:var(--font-general-sans)] font-semibold text-[22px] tracking-tight opacity-0"
+        className="mt-6 [font-family:var(--font-general-sans)] font-semibold uppercase text-[22px] tracking-tight opacity-0"
       >
-        DLX <span className="text-[var(--orange-500)]">Digital</span>
+        Diego <span className="text-[var(--orange-500)]">Freire</span>
       </p>
       <p ref={taglineRef} className="mt-2 text-muted text-[15px] text-center max-w-[300px] opacity-0">
         {site.bio.tagline}
