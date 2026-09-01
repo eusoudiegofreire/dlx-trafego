@@ -108,7 +108,7 @@ export default function BioHero() {
   }, [gsap]);
 
   return (
-    <div className="relative flex flex-col items-center justify-center px-6 pt-20 pb-10 overflow-hidden">
+    <div className="relative flex flex-col items-center justify-center px-6 pt-14 pb-6 sm:pt-20 sm:pb-10 overflow-hidden">
       {/* slow ambient orange haze — keeps the black from reading flat */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
         <div
@@ -120,13 +120,13 @@ export default function BioHero() {
         />
       </div>
 
-      <div ref={logoRef} className="mb-8 opacity-0">
-        <Image src={logoDlx} alt="DLX Digital" priority className="h-9 w-auto" />
+      <div ref={logoRef} className="mb-6 sm:mb-8 opacity-0">
+        <Image src={logoDlx} alt="DLX Digital" priority className="h-8 w-auto sm:h-9" />
       </div>
 
       <div
         ref={photoRef}
-        className="relative w-[128px] h-[128px] sm:w-[152px] sm:h-[152px] rounded-full overflow-hidden border-2 border-[rgba(255,90,31,0.5)] shadow-[0_0_0_6px_rgba(255,90,31,0.06)] opacity-0"
+        className="relative w-[112px] h-[112px] sm:w-[152px] sm:h-[152px] rounded-full overflow-hidden border-2 border-[rgba(255,90,31,0.5)] shadow-[0_0_0_6px_rgba(255,90,31,0.06)] opacity-0"
       >
         <Image
           src={diegoRetrato}
@@ -141,15 +141,18 @@ export default function BioHero() {
 
       <p
         ref={nameRef}
-        className="mt-6 [font-family:var(--font-general-sans)] font-semibold uppercase text-[22px] tracking-tight opacity-0"
+        className="mt-4 sm:mt-6 [font-family:var(--font-general-sans)] font-semibold uppercase text-[20px] sm:text-[22px] tracking-tight opacity-0"
       >
         Diego <span className="text-[var(--orange-500)]">Freire</span>
       </p>
-      <p ref={taglineRef} className="mt-2 text-muted text-[15px] text-center max-w-[300px] opacity-0">
+      <p
+        ref={taglineRef}
+        className="mt-1 sm:mt-2 text-muted text-[14px] sm:text-[15px] text-center max-w-[300px] opacity-0"
+      >
         {site.bio.tagline}
       </p>
 
-      <div className="mt-10 w-full max-w-[380px] flex flex-col gap-3.5">
+      <div className="mt-7 sm:mt-10 w-full max-w-[380px] flex flex-col gap-2.5 sm:gap-3.5">
         {LINKS.map((link, i) => {
           const isInternal = link.href.startsWith("/");
           const content = (
@@ -165,7 +168,7 @@ export default function BioHero() {
               />
             </>
           );
-          const className = `group w-full h-14 px-5 rounded-2xl flex items-center justify-between font-medium text-[15px] transition-all duration-300 ease-out hover:-translate-y-[3px] active:scale-[0.97] ${
+          const className = `group w-full h-12 sm:h-14 px-5 rounded-2xl flex items-center justify-between font-medium text-[15px] transition-all duration-300 ease-out hover:-translate-y-[3px] active:scale-[0.97] ${
             link.primary
               ? "bg-[var(--orange-500)] text-[var(--ink)] hover:bg-[var(--orange-400)] motion-safe:animate-[link-glow-pulse_3.4s_ease-in-out_infinite]"
               : "bg-[var(--surface-dark)] border border-[var(--border-dark)] text-[var(--text-dark-1)] hover:border-[var(--border-dark-hover)] hover:bg-[var(--surface-dark-hover)]"
