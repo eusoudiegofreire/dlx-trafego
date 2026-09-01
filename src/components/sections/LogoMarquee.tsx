@@ -5,6 +5,8 @@ import eska from "../../../public/images/eska.jpg";
 import adrianaOst from "../../../public/images/adriana-ost.jpg";
 import institutoSuelen from "../../../public/images/instituto-suelen.jpg";
 import copeti from "../../../public/images/copeti.jpg";
+import laBelle from "../../../public/images/la-belle.jpg";
+import borelli from "../../../public/images/borelli.jpg";
 
 const LOGOS = [
   { src: soPizzas, alt: "Só Pizzas" },
@@ -13,6 +15,8 @@ const LOGOS = [
   { src: adrianaOst, alt: "Adriana Ost" },
   { src: institutoSuelen, alt: "Instituto Suelen Paranho" },
   { src: copeti, alt: "Copeti Fitwear" },
+  { src: laBelle, alt: "La Belle" },
+  { src: borelli, alt: "Borelli Gelato" },
 ];
 
 export default function LogoMarquee() {
