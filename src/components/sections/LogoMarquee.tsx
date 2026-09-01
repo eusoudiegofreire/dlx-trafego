@@ -7,6 +7,7 @@ import institutoSuelen from "../../../public/images/instituto-suelen.jpg";
 import copeti from "../../../public/images/copeti.jpg";
 import laBelle from "../../../public/images/la-belle.jpg";
 import borelli from "../../../public/images/borelli.jpg";
+import liderMaquinas from "../../../public/images/lider-maquinas.jpg";
 
 const LOGOS = [
   { src: soPizzas, alt: "Só Pizzas" },
@@ -17,6 +18,7 @@ const LOGOS = [
   { src: copeti, alt: "Copeti Fitwear" },
   { src: laBelle, alt: "La Belle" },
   { src: borelli, alt: "Borelli Gelato" },
+  { src: liderMaquinas, alt: "Líder Máquinas" },
 ];
 
 export default function LogoMarquee() {
