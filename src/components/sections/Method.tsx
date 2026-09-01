@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { Search, Rocket, SlidersHorizontal, BarChart3 } from "lucide-react";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { useGsap, EASE } from "@/lib/gsap";
@@ -8,6 +9,12 @@ import { useGsap, EASE } from "@/lib/gsap";
 // Two bookend cards (full width) frame two half-width cards in between —
 // reads 01 → 02 → 03 → 04 top-to-bottom, left-to-right, with no card
 // spanning multiple rows (that's what left 02 half-empty before).
+//
+// `enter` drives the scroll-in direction: the two bookend cards (01/04)
+// span the full width so they don't have a natural "side" — they fade
+// up like before. 02/03 sit in the left/right half of the row the
+// connector line crosses, so they slide in from the side they actually
+// live on, echoing the diagram instead of being an arbitrary alternation.
 const STEPS = [
   {
     icon: Search,
@@ -16,6 +23,7 @@ const STEPS = [
     text: "Antes de gastar R$1, a gente entende teu negócio, teu ticket e quem é teu cliente. Anúncio sem isso é aposta.",
     span: "lg:col-span-2",
     wide: true,
+    enter: "up",
     delay: 0,
   },
   {
@@ -24,6 +32,7 @@ const STEPS = [
     title: "Campanha",
     text: "Criativo e segmentação feitos pra vender, não pra viralizar. A mensagem certa pra pessoa certa.",
     span: "lg:col-span-1",
+    enter: "left",
     delay: 0.14,
   },
   {
@@ -32,6 +41,7 @@ const STEPS = [
     title: "Otimização",
     text: "Ajuste constante: a gente corta o que traz curtida e reforça o que traz contato barato. Todo dia de olho.",
     span: "lg:col-span-1",
+    enter: "right",
     delay: 0.22,
   },
   {
@@ -41,9 +51,16 @@ const STEPS = [
     text: "Relatório claro: quanto entrou, quanto saiu, quantos contatos chegaram. Sem enrolação, sem métrica de vaidade.",
     span: "lg:col-span-2",
     wide: true,
+    enter: "up",
     delay: 0.34,
   },
 ];
+
+const ENTER_FROM: Record<string, { x?: number; y?: number }> = {
+  up: { y: 32 },
+  left: { x: -48 },
+  right: { x: 48 },
+};
 
 export default function Method() {
   const gridRef = useRef<HTMLDivElement>(null);
@@ -62,7 +79,7 @@ export default function Method() {
     }
 
     if (reduceMotion) {
-      gsap.set(cards, { opacity: 1, y: 0 });
+      gsap.set(cards, { opacity: 1, x: 0, y: 0 });
       if (path) gsap.set(path, { strokeDashoffset: 0 });
       return;
     }
@@ -90,10 +107,11 @@ export default function Method() {
       STEPS.forEach((s, i) => {
         const card = cards[i];
         if (!card) return;
+        const from = ENTER_FROM[s.enter];
         tl.fromTo(
           card,
-          { opacity: 0, y: 32 },
-          { opacity: 1, y: 0, duration: 0.7, ease: EASE.entrance },
+          { opacity: 0, x: from.x ?? 0, y: from.y ?? 0 },
+          { opacity: 1, x: 0, y: 0, duration: 0.7, ease: EASE.entrance },
           s.delay
         );
       });
@@ -151,11 +169,13 @@ export default function Method() {
                   {s.wide ? (
                     <>
                       <div className="flex items-center gap-4 sm:flex-col sm:items-start sm:gap-8">
-                        <s.icon
-                          size={30}
-                          strokeWidth={1.5}
-                          className="text-[var(--orange-500)] shrink-0"
-                        />
+                        <motion.div
+                          className="shrink-0 inline-block"
+                          whileHover={{ scale: 1.15, rotate: -6 }}
+                          transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                        >
+                          <s.icon size={30} strokeWidth={1.5} className="text-[var(--orange-500)]" />
+                        </motion.div>
                         <span className="[font-family:var(--font-mono)] text-[13px] text-faint">
                           {s.step}
                         </span>
@@ -170,7 +190,13 @@ export default function Method() {
                   ) : (
                     <>
                       <div className="flex items-start justify-between">
-                        <s.icon size={26} strokeWidth={1.5} className="text-[var(--orange-500)]" />
+                        <motion.div
+                          className="inline-block"
+                          whileHover={{ scale: 1.15, rotate: -6 }}
+                          transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+                        >
+                          <s.icon size={26} strokeWidth={1.5} className="text-[var(--orange-500)]" />
+                        </motion.div>
                         <span className="[font-family:var(--font-mono)] text-[13px] text-faint">
                           {s.step}
                         </span>
