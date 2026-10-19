@@ -38,10 +38,10 @@ function Num({ v }: { v: string }) {
 }
 
 export default function Calculator() {
-  const [verba, setVerba] = useState(40);
+  const [verba, setVerba] = useState(3000);
   const [ticket, setTicket] = useState(70);
 
-  const mes = verba * 30;
+  const mes = verba;
   // faixa usando o pior e o melhor custo por pedido reais das contas
   const pedMin = Math.round(mes / CUSTO_MAX);
   const pedMax = Math.round(mes / CUSTO_MIN);
@@ -70,26 +70,29 @@ export default function Calculator() {
         <AnimatedSection delay={0.1}>
           <div className="rounded-[24px] bg-[var(--ink)] text-[var(--text-dark-1)] p-7 sm:p-9 shadow-[0_30px_80px_rgba(10,10,10,0.25)]">
             <div className="space-y-8">
-              <Slider label="Verba de anúncio por dia" value={verba} min={20} max={300} step={5} onChange={setVerba} fmt={(v) => `R$ ${v}`} />
+              <Slider label="Verba de anúncio por mês" value={verba} min={1000} max={15000} step={500} onChange={setVerba} fmt={(v) => `R$ ${brl(v)}`} />
+              <p className={`-mt-5 text-[12px] font-mono ${verba >= 3000 ? "text-[var(--orange-500)]" : "text-[var(--text-dark-3)]"}`}>
+                {verba >= 3000 ? "✓ faixa ideal: a partir de R$ 3.000/mês" : "abaixo do ideal (R$ 3.000/mês): funciona, mas o resultado tende a ser menor"}
+              </p>
               <Slider label="Ticket médio do teu pedido" value={ticket} min={25} max={180} step={5} onChange={setTicket} fmt={(v) => `R$ ${v}`} />
             </div>
 
             <div className="mt-10 pt-8 border-t border-white/10 grid sm:grid-cols-2 gap-6">
               <div>
                 <p className="text-[13px] text-[var(--text-dark-3)]">pedidos por mês (estimativa)</p>
-                <p className="mt-1 font-mono text-[clamp(1.8rem,4vw,2.6rem)] text-[var(--orange-500)] tabular-nums leading-tight">
+                <p className="mt-1 font-mono text-[clamp(1.4rem,2.6vw,2.1rem)] text-[var(--orange-500)] tabular-nums leading-tight whitespace-nowrap">
                   <Num v={`${brl(pedMin)} – ${brl(pedMax)}`} />
                 </p>
               </div>
               <div>
                 <p className="text-[13px] text-[var(--text-dark-3)]">em vendas por mês (estimativa)</p>
-                <p className="mt-1 font-mono text-[clamp(1.4rem,3vw,1.9rem)] tabular-nums leading-tight">
+                <p className="mt-1 font-mono text-[clamp(1.1rem,2vw,1.5rem)] tabular-nums leading-tight whitespace-nowrap">
                   <Num v={`R$ ${brl(vendMin / 1000, 1)} – ${brl(vendMax / 1000, 1)} mil`} />
                 </p>
               </div>
             </div>
             <p className="mt-6 text-[13px] text-[var(--text-dark-3)]">
-              Investimento no mês: <span className="text-[var(--text-dark-1)] font-mono">R$ {brl(mes)}</span>, pago direto pra Meta/Google. É uma estimativa baseada em resultado real, não uma garantia: cidade, cardápio e preço mudam a conta.
+              Verba de R$ {brl(mes)}/mês paga direto pra Meta/Google, separada da gestão. É uma estimativa baseada em resultado real, não uma garantia: cidade, cardápio e preço mudam a conta.
             </p>
           </div>
         </AnimatedSection>

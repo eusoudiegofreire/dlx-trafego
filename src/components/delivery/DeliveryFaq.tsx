@@ -7,12 +7,12 @@ import AnimatedSection from "@/components/ui/AnimatedSection";
 
 const QA = [
   {
-    q: "Funciona com iFood?",
-    a: "Dá pra levar gente pro teu iFood, mas lá a gente não consegue medir pedido por pedido. O resultado mais forte e mais barato vem do cardápio próprio (Anota AI, Goomer, site, WhatsApp com cardápio), onde cada pedido é rastreado e não tem comissão.",
+    q: "Vocês trabalham com iFood?",
+    a: "Não. O nosso foco é o teu canal próprio de delivery: plataforma de pedidos, cardápio digital ou site. É lá que cada pedido é rastreado, a gente sabe quanto custou e tu não paga comissão de aplicativo.",
   },
   {
     q: "Quanto preciso investir em anúncio?",
-    a: "A verba é tua e vai direto pra Meta/Google, sem passar pela gente. Dá pra começar a partir de uns R$ 20 por dia e subir conforme o pedido barato aparece. Na conversa a gente define o valor certo pra tua cidade.",
+    a: "O ideal é a partir de R$ 3.000 por mês em anúncio. É a faixa em que os nossos clientes de delivery têm os melhores resultados, porque dá verba pra testar oferta e criativo e escalar o que vende. Dá pra começar com menos, mas o resultado tende a ser menor. Essa verba é tua, vai direto pra Meta/Google e é separada do valor da gestão.",
   },
   {
     q: "Em quanto tempo aparece pedido?",
