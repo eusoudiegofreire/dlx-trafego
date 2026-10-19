@@ -3,7 +3,10 @@
 import { useRef, useState } from "react";
 import { AnimatePresence, interpolate, motion, useMotionValueEvent, useScroll, useTransform, type MotionValue } from "framer-motion";
 import { Bike, Check, Heart, MessageCircle, Plus, Send, ShoppingBag } from "lucide-react";
+import Image from "next/image";
 import PizzaArt, { type PizzaKind } from "./PizzaArt";
+import anuncio from "../../../public/images/delivery/anuncio-pizza.webp";
+import postFeed from "../../../public/images/delivery/post-feed.webp";
 
 // Tudo dentro do celular é uma "linha do tempo" ligada à rolagem:
 // rolou pra baixo, o vídeo anda; rolou pra cima, volta. Coordenadas em px
@@ -89,8 +92,7 @@ function Fly({ p, from, to, t, kind }: { p: MotionValue<number>; from: [number, 
 function Phone({ p }: { p: MotionValue<number> }) {
   // feed
   const feedY = useT(p, [0.02, 0.18], [0, -320]);
-  const adPizza = useT(p, [0.06, 0.2], [0.75, 1]);
-  const adSpin = useT(p, [0, 0.35], [-40, 40]);
+  const adZoom = useT(p, [0.04, 0.3], [1.18, 1]);
   const ctaScale = useT(p, [0.29, 0.3, 0.31], [1, 0.94, 1]);
   const feedX = useT(p, [0.33, 0.39], ["0%", "-100%"]);
   // cardápio
@@ -135,9 +137,8 @@ function Phone({ p }: { p: MotionValue<number> }) {
               <span className="w-7 h-7 rounded-full bg-gradient-to-br from-[#8ab4f8] to-[#5b6fd6]" />
               <span className="text-[10px] font-semibold">amigo.da.silva</span>
             </div>
-            <div className="h-[220px] rounded-[8px] bg-[linear-gradient(160deg,#9ec5d8,#e9d5b5_60%,#d9a874)] relative overflow-hidden">
-              <span className="absolute bottom-0 inset-x-0 h-20 bg-[linear-gradient(transparent,rgba(0,0,0,0.25))]" />
-              <span className="absolute right-6 top-6 w-10 h-10 rounded-full bg-[#fff6d8]" />
+            <div className="h-[220px] rounded-[8px] relative overflow-hidden">
+              <Image src={postFeed} alt="" fill sizes="230px" className="object-cover" />
             </div>
             <div className="flex gap-3 mt-2 text-black/70"><Heart size={15} /><MessageCircle size={15} /><Send size={15} /></div>
           </div>
@@ -150,10 +151,11 @@ function Phone({ p }: { p: MotionValue<number> }) {
                 <p className="text-[8px] text-black/50">Patrocinado</p>
               </div>
             </div>
-            <div className="h-[220px] rounded-[8px] bg-[radial-gradient(circle_at_50%_45%,#3a2a1e,#141110_75%)] relative overflow-hidden flex items-center justify-center">
-              <motion.div style={{ scale: adPizza, rotate: adSpin }}>
-                <PizzaArt kind="calabresa" size={168} />
+            <div className="h-[220px] rounded-[8px] bg-[#141110] relative overflow-hidden">
+              <motion.div className="absolute inset-0" style={{ scale: adZoom }}>
+                <Image src={anuncio} alt="Anúncio de pizza de calabresa" fill sizes="230px" className="object-cover" />
               </motion.div>
+              <span className="absolute inset-x-0 bottom-0 h-16 bg-[linear-gradient(transparent,rgba(0,0,0,0.55))]" />
               <span className="absolute top-3 left-3 bg-[var(--orange-500)] text-[9px] font-bold px-2 py-1 rounded-[4px]">PIZZA CALABRESA G</span>
               <span className="absolute bottom-3 right-3 bg-[var(--cream)] text-[11px] font-bold px-2 py-1 rounded-[6px] font-mono">R$ 49,90</span>
               <span className="absolute bottom-3 left-3 text-[var(--cream)] text-[9px] opacity-80">🛵 entrega em ~35 min</span>
