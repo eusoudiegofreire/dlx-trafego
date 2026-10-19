@@ -76,7 +76,7 @@ export default function Included() {
                 ))}
               </div>
               <div className="mt-5 rounded-[12px] border border-white/10 p-3 text-[12px] text-[var(--text-dark-2)]">
-                <span className="text-[var(--orange-500)]">Próxima semana:</span> subir verba no combo que mais vendeu e testar criativo novo pra terça.
+                <span className="text-[var(--orange-500)]">Próxima semana:</span> subir verba no combo que mais vendeu e testar criativo novo pros dias mais fracos.
               </div>
             </div>
           </AnimatedSection>

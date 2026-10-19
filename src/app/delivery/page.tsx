@@ -17,7 +17,7 @@ import { SITE_URL, site } from "@/config/site";
 
 const title = "Tráfego Pago para Delivery";
 const description =
-  "Anúncio no Instagram, Facebook e Google que vira pedido no teu cardápio. Mais de 10 mil pedidos em 30 dias nas contas de delivery que a DLX gerencia.";
+  "Anúncio no Instagram, Facebook e Google que vira pedido no teu cardápio. Pedido rastreado, custo por pedido na mão e relatório toda semana.";
 
 export const metadata: Metadata = {
   title,

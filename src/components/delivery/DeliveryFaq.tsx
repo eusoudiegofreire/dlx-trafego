@@ -24,7 +24,7 @@ const QA = [
   },
   {
     q: "Atende só Rondônia?",
-    a: "A DLX é de Ariquemes e gerencia delivery em Ariquemes, Porto Velho e Manaus. Como tudo é online, atende qualquer cidade.",
+    a: "A DLX é de Rondônia e já gerencia delivery em mais de um estado. Como tudo é online, atende qualquer cidade.",
   },
 ];
 

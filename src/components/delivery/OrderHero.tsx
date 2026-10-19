@@ -15,7 +15,7 @@ const ITENS = [
   ["1x Pizza Família", "2x Refri lata"],
 ];
 const ORIGEM = ["Anúncio Instagram", "Anúncio Facebook", "Google · pesquisa", "Anúncio Reels"];
-const BAIRROS = ["Setor 03", "Jd. Jorge Teixeira", "Centro", "Setor 09", "Embratel", "Nova Porto Velho"];
+const BAIRROS = ["Centro", "Jd. América", "Vila Nova", "Setor Norte", "Bela Vista", "Nova Esperança"];
 
 type Ticket = { id: number; itens: string[]; origem: string; bairro: string; hora: string };
 
@@ -72,7 +72,7 @@ export default function OrderHero() {
     return () => window.clearInterval(iv);
   }, []);
 
-  const words = ["Teu", "delivery", "cheio."];
+  const words = ["Anúncio", "que", "vira"];
 
   return (
     <div className="relative min-h-screen flex flex-col justify-center pt-28 pb-16 overflow-hidden">
@@ -128,7 +128,7 @@ export default function OrderHero() {
                 animate={{ y: 0 }}
                 transition={{ duration: 0.9, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
               >
-                Até na terça.
+                pedido.
               </motion.span>
             </span>
           </h1>
@@ -139,7 +139,7 @@ export default function OrderHero() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.85 }}
           >
-            Anúncio no Instagram, Facebook e Google que vira <strong className="text-[var(--text-dark-1)] font-semibold">pedido no teu cardápio</strong>, não curtida. E toda semana tu vê quanto custou cada pedido.
+            Campanha no Instagram, Facebook e Google feita pra <strong className="text-[var(--text-dark-1)] font-semibold">encher o teu delivery</strong>, não pra juntar curtida. E toda semana tu vê quanto custou cada pedido.
           </motion.p>
 
           <motion.div
@@ -157,20 +157,6 @@ export default function OrderHero() {
             </a>
           </motion.div>
 
-          <motion.div
-            className="mt-10 flex items-center gap-4 text-[13px] text-faint"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
-          >
-            <span className="font-mono text-[var(--text-dark-1)] text-[22px] tabular-nums">
-              {brl(TOTAL.pedidos)}
-            </span>
-            <span className="leading-tight">
-              pedidos registrados nos últimos
-              <br /> 30 dias nas contas de delivery da DLX
-            </span>
-          </motion.div>
         </div>
 
         {/* impressora de pedidos */}

@@ -62,7 +62,7 @@ export default function Calculator() {
           </AnimatedSection>
           <AnimatedSection delay={0.1}>
             <p className="mt-6 text-muted text-[17px] max-w-[460px]">
-              Mexe nos controles. A conta usa o custo por pedido <strong className="font-semibold">real</strong> das contas de delivery que a gente gerencia hoje: de R$ {brl(CUSTO_MIN, 2)} na melhor a R$ {brl(CUSTO_MAX, 2)} na mais cara.
+              Mexe nos controles. A conta usa o custo por pedido <strong className="font-semibold">real</strong> das campanhas de delivery que a gente gerencia hoje: de R$ {brl(CUSTO_MIN, 2)} na melhor a R$ {brl(CUSTO_MAX, 2)} na mais cara.
             </p>
           </AnimatedSection>
         </div>

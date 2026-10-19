@@ -36,18 +36,18 @@ export default function WeekPain() {
       <div className="container-wide grid lg:grid-cols-[1fr_1fr] gap-16 items-center">
         <div>
           <AnimatedSection>
-            <p className="eyebrow mb-4">Conhece essa semana?</p>
+            <p className="eyebrow mb-4">Conhece esse sobe e desce?</p>
           </AnimatedSection>
           <AnimatedSection delay={0.05}>
             <h2 className="[font-family:var(--font-general-sans)] font-semibold text-[clamp(2.2rem,5.4vw,4rem)] leading-[0.98]">
-              Sexta lota sozinho.
+              Movimento não pode
               <br />
-              <span className="text-[var(--orange-500)]">O problema é a terça.</span>
+              <span className="text-[var(--orange-500)]">depender da sorte.</span>
             </h2>
           </AnimatedSection>
           <AnimatedSection delay={0.1}>
             <p className="mt-6 text-muted text-[17px] max-w-[480px]">
-              O fim de semana paga o mês, mas o forno ligado na terça com a cozinha parada custa caro. Anúncio bem feito é a alavanca pros dias fracos: tu escolhe quando quer mais pedido.
+              Tem dia que lota sozinho e tem dia que a cozinha fica parada esperando. Anúncio bem feito é a alavanca: tu escolhe quando quer mais pedido, em vez de esperar o movimento aparecer.
             </p>
           </AnimatedSection>
         </div>
