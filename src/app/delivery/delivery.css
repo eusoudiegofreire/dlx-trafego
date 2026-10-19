@@ -1,0 +1,53 @@
+/* estilos só da página /delivery — não mexe no globals.css */
+
+/* papel térmico com borda serrilhada embaixo */
+.receipt {
+  position: relative;
+  background: var(--cream);
+  border-radius: 6px 6px 0 0;
+  --tooth: 8px;
+  -webkit-mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / calc(var(--tooth) * 2) 100%;
+  mask: conic-gradient(from -45deg at bottom, #0000, #000 1deg 89deg, #0000 90deg) 50% / calc(var(--tooth) * 2) 100%;
+}
+
+.ticker-track {
+  animation: logo-marquee 40s linear infinite;
+}
+
+.range-dlx {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--orange-500) var(--fill, 50%), rgba(255, 255, 255, 0.12) var(--fill, 50%));
+  outline: none;
+}
+.range-dlx::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 6px solid var(--orange-500);
+  cursor: grab;
+  box-shadow: 0 0 0 6px rgba(255, 90, 31, 0.15);
+}
+.range-dlx::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--cream);
+  border: 6px solid var(--orange-500);
+  cursor: grab;
+}
+
+@keyframes steam {
+  0% { transform: translateY(0) scaleX(1); opacity: 0; }
+  30% { opacity: 0.5; }
+  100% { transform: translateY(-60px) scaleX(1.6); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; }
+}
