@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import BioHero from "@/components/sections/BioHero";
 import LogoMarquee from "@/components/sections/LogoMarquee";
 import { SITE_URL, site } from "@/config/site";
+import { JsonLd, businessNode } from "@/lib/seo";
 
 export const metadata: Metadata = {
   // no `title` here on purpose — inherits the root layout's
@@ -28,22 +29,23 @@ export const metadata: Metadata = {
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "@id": `${SITE_URL}/#organization`,
-  name: site.name,
-  url: SITE_URL,
-  description: site.bio.tagline,
-  areaServed: site.areaServed,
-  sameAs: [site.instagram],
+  "@graph": [
+    businessNode(),
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: site.name,
+      inLanguage: "pt-BR",
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+  ],
 };
 
 export default function BioPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
       <main className="section-dark min-h-screen flex flex-col">
         <BioHero />
         <LogoMarquee />

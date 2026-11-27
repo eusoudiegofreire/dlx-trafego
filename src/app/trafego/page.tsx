@@ -13,6 +13,8 @@ import Footer from "@/components/sections/Footer";
 import StackSection from "@/components/ui/StackSection";
 import KineticWord from "@/components/ui/KineticWord";
 import { SITE_URL, site } from "@/config/site";
+import { FAQS } from "@/content/trafego-faq";
+import { BUSINESS_ID, JsonLd, breadcrumbNode, businessNode, faqNode } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: site.trafego.title,
@@ -24,6 +26,8 @@ export const metadata: Metadata = {
     "Google Ads",
     "marketing digital Rondônia",
     "agência de tráfego pago",
+    "tráfego pago Ariquemes",
+    "gestor de tráfego Rondônia",
   ],
   alternates: {
     canonical: "/trafego",
@@ -43,33 +47,35 @@ export const metadata: Metadata = {
   },
 };
 
+const URL_TRAFEGO = `${SITE_URL}/trafego`;
+
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "@id": `${SITE_URL}/trafego#organization`,
-  name: site.name,
-  url: `${SITE_URL}/trafego`,
-  description: site.trafego.description,
-  areaServed: site.areaServed,
-  sameAs: [site.instagram],
-  makesOffer: {
-    "@type": "Offer",
-    itemOffered: {
+  "@graph": [
+    businessNode(),
+    {
       "@type": "Service",
+      "@id": `${URL_TRAFEGO}#service`,
       name: "Tráfego Pago (Meta Ads e Google Ads)",
+      serviceType: "Gestão de tráfego pago",
       description:
         "Gestão de campanhas de anúncios pagos para negócios locais, com diagnóstico, criação de campanha, otimização diária e relatório de resultados.",
+      url: URL_TRAFEGO,
+      provider: { "@id": BUSINESS_ID },
+      areaServed: site.cities.map((c) => ({ "@type": "City", name: `${c}, ${site.region}` })),
     },
-  },
+    breadcrumbNode(URL_TRAFEGO, [
+      { name: "Início", path: "/" },
+      { name: "Tráfego pago", path: "/trafego" },
+    ]),
+    faqNode(URL_TRAFEGO, FAQS),
+  ],
 };
 
 export default function TrafegoPage() {
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+      <JsonLd data={jsonLd} />
       <Navbar />
       <main>
         <StackSection mode="dark" seam={false}>

@@ -2,8 +2,8 @@ import Link from "next/link";
 import SignatureFlow from "@/components/ui/SignatureFlow";
 import AnimatedSection from "@/components/ui/AnimatedSection";
 import { site } from "@/config/site";
+import { SERVICES } from "@/content/servicos";
 
-const UPCOMING = ["Criação de Site", "Automação"];
 
 export default function Footer() {
   return (
@@ -37,21 +37,34 @@ export default function Footer() {
               </a>
             </div>
 
-            <p className="text-faint text-[12px] tracking-wide">
-              Anúncios via Meta Ads · Google Ads
-            </p>
+            <address className="not-italic text-faint text-[13px] leading-relaxed">
+              {site.name} · {site.city}, {site.regionName}
+              <br />
+              <a href={site.phoneHref} className="hover:text-[var(--text-dark-1)] transition-colors">
+                {site.phoneDisplay}
+              </a>
+              {" · "}Atendimento em todo {site.regionName} e Amazonas
+            </address>
           </div>
 
-          <div>
-            <p className="eyebrow mb-4">Em breve</p>
+          <nav aria-label="Serviços">
+            <p className="eyebrow mb-4">
+              <Link href="/servicos" className="hover:text-[var(--text-dark-1)] transition-colors">Serviços</Link>
+            </p>
             <ul className="flex flex-col gap-2">
-              {UPCOMING.map((item) => (
-                <li key={item} className="text-faint text-[14px]">
-                  {item}
+              {[
+                ...SERVICES.map((s) => ({ href: `/${s.slug}`, name: s.name })),
+                { href: "/trafego", name: "Tráfego pago para negócios locais" },
+                { href: "/delivery", name: "Tráfego pago para delivery" },
+              ].map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="text-faint text-[14px] hover:text-[var(--text-dark-1)] transition-colors">
+                    {item.name}
+                  </Link>
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
         </div>
 
         <div className="border-t border-subtle py-10 flex justify-center opacity-[0.15]">

@@ -11,12 +11,21 @@ export const site = {
   instagramDiego: "https://www.instagram.com/eusoudiegofreire/",
   instagramDiegoHandle: "@eusoudiegofreire",
   whatsapp: "https://wa.me/5569992487348",
+  // telefone visível + tel: link — sinal de NAP para SEO local
+  phone: "+55 69 99248-7348",
+  phoneDisplay: "(69) 99248-7348",
+  phoneHref: "tel:+5569992487348",
+  city: "Ariquemes",
+  region: "RO",
+  regionName: "Rondônia",
+  // cidades citadas no schema (areaServed). Ariquemes primeiro: é a base.
+  cities: ["Ariquemes", "Porto Velho", "Ji-Paraná", "Jaru", "Machadinho D'Oeste", "Buritis"],
   areaServed: ["Rondônia", "Amazonas"],
   locale: "pt_BR",
   trafego: {
-    title: "Tráfego Pago para Negócios Locais",
+    title: "Tráfego Pago para Negócios Locais em Rondônia",
     description:
-      "Anúncios no Meta e Google que trazem gente certa pra dentro do seu negócio — não só curtida. Diagnóstico, campanha e otimização feitos por quem entende o seu ticket médio.",
+      "Gestão de tráfego pago em Ariquemes e Rondônia: anúncios no Meta e no Google que trazem cliente de verdade pro seu negócio local, não só curtida.",
   },
   bio: {
     tagline: "Mais visibilidade, mais contato, mais cliente pro seu negócio local.",
