@@ -37,12 +37,17 @@ export default function Navbar() {
             className="h-7 sm:h-9 w-auto"
           />
         </Link>
+        <div className="flex items-center gap-2 sm:gap-6">
+        <Link href="/servicos" className="hidden sm:inline text-[14px] text-[var(--text-dark-2)] hover:text-[var(--text-dark-1)] transition-colors">
+          Serviços
+        </Link>
         <Link
           href="#cta"
           className="inline-flex items-center h-11 px-5 rounded-xl bg-[var(--orange-500)] text-[var(--ink)] font-medium text-[14px] transition-colors hover:bg-[var(--orange-400)]"
         >
           Falar no WhatsApp
         </Link>
+        </div>
       </div>
     </header>
   );

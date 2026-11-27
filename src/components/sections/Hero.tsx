@@ -105,7 +105,7 @@ export default function Hero() {
       <div className="container-wide relative grid lg:grid-cols-[1.05fr_0.95fr] gap-16 items-center">
         <div>
           <p ref={eyebrowRef} className="eyebrow mb-4 opacity-0">
-            DLX Digital · Tráfego Pago
+            Tráfego pago · Ariquemes e Rondônia
           </p>
 
           <h1 className="[font-family:var(--font-general-sans)] font-semibold uppercase text-[clamp(2.5rem,8vw,5.25rem)] leading-[0.94] tracking-tight">
